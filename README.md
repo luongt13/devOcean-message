@@ -27,7 +27,7 @@ Tran Luong, Dominique Johnson, Nikki Gilpin
 ## MVP/Post MVP
 
 ### MVP
-* 
+[Link to our project board](https://github.com/luongt13/message-me/projects/1?add_cards_query=is%3Aopen)
 
 ### Post MVP
 * Users can view posts from other users
