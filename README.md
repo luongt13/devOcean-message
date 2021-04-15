@@ -1,7 +1,7 @@
 # Project Overview
 
 ## Project Name
-Message Me (TBD)
+DevOcean
 
 ## Team Members
 Tran Luong, Dominique Johnson, Nikki Gilpin
