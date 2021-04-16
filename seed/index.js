@@ -1,7 +1,7 @@
 const db = require('../db/index')
 const User = require("../models/user.js")
-// const Conversation = require("../models/conversation.js")
-// const Message = require("../models/message.js")
+const Conversation = require("../models/converstion.js")
+const Message = require("../models/message.js")
 const faker = require("faker");
 
 
@@ -10,6 +10,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 
 const main = async () => {
+
+
 
   await User.deleteMany({});
 
@@ -32,8 +34,47 @@ const main = async () => {
     users.push(user)
   }
   await User.insertMany(users)
-  console.log("Created Users!")
+  // console.log("Created Users!")
+
+  await Message.deleteMany({});
+
+  let createdUser = await User.find({})
+  console.log(createdUser);
+
+  let messages = []
+for (let i = 0; i < 10; i++) {
+  let message = {
+    content: faker.lorem.sentence(),
+    sender: createdUser[0]._id,
+    receiver: createdUser[1]._id
+
+  };
+  messages.push(message)
+}
+await Message.insertMany(messages)
+  console.log("Created Messages!")
+
+
+  
+  await Conversation.deleteMany({});
+  let createdMessages = await Message.find({})
+  // console.log(createdMessage);
+
+  let conversations = [];
+  for (let i = 0; i < 10; i++) {
+    let conversation = {
+    userOneId: createdUser[0]._id,
+    userTwoId:createdUser[1]._id,
+    messages: createdMessages
+    };
+    conversations.push(conversation)
+  }
+  await Conversation.insertMany(conversations)
+  // console.log("Created Users!")
+
 };
+
+
 const run = async () => {
     await main()
     db.close()
