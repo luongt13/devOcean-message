@@ -14,6 +14,7 @@ const userSchema = new Schema(
     languages: { type: String, required: true },
     professionalLink: { type: String, required: true },
     about: { type: String, required: true },
+    //references conversation model
     conversations: [{ type: Schema.Types.ObjectId, ref: "Conversation" }]
     },
     { timestamps: true }
