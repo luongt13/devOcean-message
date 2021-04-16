@@ -1,22 +1,99 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const db = require("../db")
+const User = require("../models/user.js")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
-const userSchema = new Schema(
-  {
-      //needed for auth 
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    password_digest: { type: String, required: true },
-    //remainder of profile
-    imgURL: { type: String, required: true },
-    location: { type: String, required: true },
-    job: { type: String, required: true },
-    languages: { type: String, required: true },
-    professionalLink: { type: String, required: true },
-    about: { type: String, required: true },
-    conversations: [{ type: Schema.Types.ObjectId, ref: "Conversation" }]
-    },
-    { timestamps: true }
-);
+db.on("error", console.error.bind(console, "Mongo Connection Error:"));
 
-module.exports = mongoose.model("User", userSchema);
+const SALT_ROUNDS = 11
+const TOKEN_KEY = "devoceanisthegreatestappever"
+
+const signUp = async (req, res) => {
+  try {
+    const { name, email, password } = req.body
+    const password_digest = await bcrypt.hash(password, SALT_ROUNDS)
+
+    const user = new User({ name, email, password_digest })
+    
+    await user.save()
+    const payload = {
+      name: user.name,
+      email: user.email,
+    }
+
+    const token = jwt.sign(payload, TOKEN_KEY)
+
+    return res.status(201).json({ token })
+    
+  } catch (error) {
+    return res.status(400).json({ error: error.message})
+  }
+}
+
+const signIn = async (req, res) => {
+  const { name, password } = req.body
+  
+  try {
+    const user = await User.findOne({ name: name })
+    if (user) {
+      if (await bcrypt.compare(password, user.password_digest)) {
+        const payload = {
+          name: user.name,
+          email: user.email,
+        }
+      
+        const token = jwt.sign(payload, TOKEN_KEY)
+  
+        return res.status(200).json({ token, payload })
+  
+      } else {
+        res.status(401).send("Invalid Credentials")
+      }
+    } else {
+      res.status(400).send("User does not exist")
+    }
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
+const verify = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1]
+    const payload = jwt.verify(token, TOKEN_KEY)
+    if (payload) {
+      return res.json(payload)
+    }
+  } catch (error) {
+    res.status(401).send("Not Authorized")
+  }
+}
+
+const changePassword = async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id)
+    const { newPassword, oldPassword } = req.body
+    if (await bcrypt.compare(oldPassword, user.password_digest)) {
+      const password_digest = bcrypt.hash(newPassword, SALT_ROUNDS)
+      user = await User.findByIdAndUpdate(
+        req.params.id,
+        { password_digest: password_digest },
+        { new: true }
+      )
+      const payload = {
+        id: user._id,
+        name: user.name,
+        email: user.email
+      }
+
+      const token = jwt.sign(payload, TOKEN_KEY)
+      return res.status(201).json({ user, token })
+    } else {
+      return res.status(400).send("Wrong password")
+    }
+  } catch (error) {
+    return res.status(400).json({error: error.message})
+  }
+}
+
+module.exports = { signUp, signIn, verify, changePassword }
