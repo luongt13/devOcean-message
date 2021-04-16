@@ -7,7 +7,6 @@ const conversationModel = new Schema(
     // userTwoId: { type: Schema.Types.ObjectId, ref: "User" },
     users: [{type: Schema.Types.ObjectId, ref: "User"}],
     messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
-
     },
     { timestamps: true }
 );
