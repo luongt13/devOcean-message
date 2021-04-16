@@ -36,41 +36,41 @@ const main = async () => {
   await User.insertMany(users)
   // console.log("Created Users!")
 
-  await Message.deleteMany({});
+//   await Message.deleteMany({});
 
-  let createdUser = await User.find({})
-  console.log(createdUser);
+//   let createdUser = await User.find({})
+//   console.log(createdUser);
 
-  let messages = []
-for (let i = 0; i < 10; i++) {
-  let message = {
-    content: faker.lorem.sentence(),
-    sender: createdUser[0]._id,
-    receiver: createdUser[1]._id
+//   let messages = []
+// for (let i = 0; i < 10; i++) {
+//   let message = {
+//     content: faker.lorem.sentence(),
+//     sender: createdUser[0]._id,
+//     receiver: createdUser[1]._id
 
-  };
-  messages.push(message)
-}
-await Message.insertMany(messages)
-  console.log("Created Messages!")
+//   };
+//   messages.push(message)
+// }
+// await Message.insertMany(messages)
+//   console.log("Created Messages!")
 
 
   
-  await Conversation.deleteMany({});
-  let createdMessages = await Message.find({})
-  // console.log(createdMessage);
+//   await Conversation.deleteMany({});
+//   let createdMessages = await Message.find({})
+//   // console.log(createdMessage);
 
-  let conversations = [];
-  for (let i = 0; i < 10; i++) {
-    let conversation = {
-    userOneId: createdUser[0]._id,
-    userTwoId:createdUser[1]._id,
-    messages: createdMessages
-    };
-    conversations.push(conversation)
-  }
-  await Conversation.insertMany(conversations)
-  // console.log("Created Users!")
+//   let conversations = [];
+//   for (let i = 0; i < 10; i++) {
+//     let conversation = {
+//     userOneId: createdUser[0]._id,
+//     userTwoId:createdUser[1]._id,
+//     messages: createdMessages
+//     };
+//     conversations.push(conversation)
+//   }
+//   await Conversation.insertMany(conversations)
+//   // console.log("Created Users!")
 
 };
 
