@@ -28,14 +28,19 @@ const createMessage = async (req,res) => {
         if (foundConversation.length === 0) {
               //if conversation is not found then create conversation
             let newConversation = await Conversation.create({users: [foundSender, foundReceiver], message: []})
+            console.log(newConversation)
+
             //add conversation id to each user
             await User.findByIdAndUpdate(
                 {_id: foundSender._id},
-                {$push: {conversation: newConversation._id}})
+                {$push: {conversations: newConversation._id}})
+            console.log(foundSender)
 
             await User.findByIdAndUpdate(
                 {_id: foundReceiver._id},
-                {$push: {conversation: newConversation._id}})
+                {$push: {conversations: newConversation._id}})
+                console.log(foundSender)
+
             //push new message into conversation messages
             let msg = await Message.create(newMessage)
             await Conversation.findByIdAndUpdate(
