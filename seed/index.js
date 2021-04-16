@@ -1,6 +1,6 @@
 const db = require('../db/index')
 const User = require("../models/user.js")
-const Conversation = require("../models/converstion.js")
+const Conversation = require("../models/conversation.js")
 const Message = require("../models/message.js")
 const faker = require("faker");
 
