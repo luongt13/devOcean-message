@@ -41,15 +41,15 @@ const createMessage = async (req,res) => {
             //push new message into conversation messages
             let msg = await Message.create(newMessage)
             await Conversation.findByIdAndUpdate(
-                    {_id: foundConversation[0]._id},
-                    {$push: {messages: msg._id}}
+                {_id: foundConversation[0]._id},
+                {$push: {messages: msg._id}}
                 )
         } else {
             //push new message into conversation messages
             let msg = await Message.create(newMessage)
             await Conversation.findByIdAndUpdate(
-                    {_id: foundConversation[0]._id},
-                    {$push: {messages: msg._id}}
+                {_id: foundConversation[0]._id},
+                {$push: {messages: msg._id}}
             )
         }
     } catch (err) {
@@ -57,7 +57,6 @@ const createMessage = async (req,res) => {
     }
 }
 
-//get messages
 //TEST
 let body = {
     content: "hello",
@@ -110,4 +109,15 @@ const testMessage = (body, conversation, user, user2) => {
 
 testMessage(body, conversation, user, user2)
 
+//get messages
+const getMessages = async (req,res) => {
+
+    //get based on the params id of the receiver (person they are sending message to)//conversation id???? find by your id and receiver id? 
+    let receiver = await User.find(req.params.id).populate("conversations")
+    //look into convo of receiver and find email/id that matches the sender? 
+    //find sender? 
+
+    //find convo?
+    let convo = await Conversation.find({ users: { $all: [receiver._id, sender._id]}})
+}
 module.exports = {createMessage}
