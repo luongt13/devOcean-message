@@ -1,35 +1,42 @@
-// const db = require("../db")
-// const User = require("../models/user.js")
-// const Message = require("../models/message.js")
-// const Conversation = require("../models/conversation.js")
+const db = require("../db")
+const User = require("../models/user.js")
+const Message = require("../models/message.js")
+const Conversation = require("../models/conversation.js")
 
-// db.on("error", console.error.bind(console, "connection error"))
+db.on("error", console.error.bind(console, "connection error"))
 
-// //create message
-// const createMessage = async (req,res) => {
-//     try {
-//         //de-structure the request body
-//         let {content, receiver, sender} = req.body
-//         //set up the nre message object
-//         let newMessage = {
-//             content,
-//             receiver,
-//             sender,
-//         }
-//          //look in conversation for user id?  if id exists then push message to message
-//         //look for user sender by username/email
-//         let foundSender = await User.find({username: sender})
-//         //look for user receiver by username/email
-//         let foundReceiver = await User.find({username: receiver})
-//         //look for conversation id with user receiver matching user2?
-//         foundReceiver.conversation.map((converse) => {
-//             await Conversation.findById(foundReceiver)
-//         })
-//     } catch (err) {
-//         return res.status(500).json({error: err.message})
-//     }
-// }
-// //get messages
+//create message
+const createMessage = async (req,res) => {
+    try {
+        //de-structure the request body
+        let {content, receiver, sender} = req.body
+        //set up the nre message object
+        let newMessage = {
+            content,
+            receiver,
+            sender,
+        }
+       
+        //look for user sender by email
+        let foundSender = await User.find({email: sender})
+        //look for user receiver by email
+        let foundReceiver = await User.find({email: receiver})
+
+        //look in conversation for user id?  if id exists then push message to message
+        let foundConversation = await Conversation.find({ $or: [{userOneId: foundReceiver._id}, {userTwoId: foundReceiver._id}]})
+
+        //push new message into conversation messages
+        let msg = await Message.create(newMessage)
+        await Conversation.findByIdAndUpdate(
+                {_id: foundConversation[0]._id},
+                {$push: {messages: msg._id}}
+            )
+
+    } catch (err) {
+        return res.status(500).json({error: err.message})
+    }
+}
+//get messages
 
 
 let body = {
@@ -55,7 +62,7 @@ let conversation = {
     id: "456"
 }
 //create message
-const createMessage = (body, conversation, user, user2) => {
+const testMessage = (body, conversation, user, user2) => {
         let {content, receiver, sender, id} = body
         let newMessage = {
             content,
@@ -81,6 +88,6 @@ const createMessage = (body, conversation, user, user2) => {
         //find users and update their conversation array 
 }
 
-createMessage(body, conversation, user, user2)
+testMessage(body, conversation, user, user2)
 
-
+module.exports = {createMessage}
