@@ -16,29 +16,49 @@ const createMessage = async (req,res) => {
             receiver,
             sender,
         }
-       
         //look for user sender by email
         let foundSender = await User.find({email: sender})
         //look for user receiver by email
         let foundReceiver = await User.find({email: receiver})
 
-        //look in conversation for user id?  if id exists then push message to message
-        let foundConversation = await Conversation.find({ $or: [{userOneId: foundReceiver._id}, {userTwoId: foundReceiver._id}]})
+        //look in conversation for user id of person receiving it?  if id exists then push message to message//need to refactor as it needs to account for msg person has with other people...//maybe users in convo can be an array and it has to match for sender AND receiver 
+        let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}})
 
-        //push new message into conversation messages
-        let msg = await Message.create(newMessage)
-        await Conversation.findByIdAndUpdate(
-                {_id: foundConversation[0]._id},
-                {$push: {messages: msg._id}}
+        // let foundConversation = await Conversation.find({ $or: [{userOneId: foundReceiver._id}, {userTwoId: foundReceiver._id}]})
+
+        if (!foundConversation) {
+              //if conversation is not found then create conversation
+            let newConversation = await Conversation.create({user1Id: {foundSender, userId: foundReceiver, message: []}})
+
+            //add conversation id to each user
+            await User.findIdAndUpdate(
+                {_id: foundSender[0]._id},
+                {$push: {conversation: newConversation._id}})
+
+            await User.findIdAndUpdate(
+                {_id: foundReceiver[0]._id},
+                {$push: {conversation: newConversation._id}})
+            //push new message into conversation messages
+            let msg = await Message.create(newMessage)
+            await Conversation.findByIdAndUpdate(
+                    {_id: foundConversation[0]._id},
+                    {$push: {messages: msg._id}}
+                )
+        } else {
+            //push new message into conversation messages
+            let msg = await Message.create(newMessage)
+            await Conversation.findByIdAndUpdate(
+                    {_id: foundConversation[0]._id},
+                    {$push: {messages: msg._id}}
             )
-
+        }
     } catch (err) {
         return res.status(500).json({error: err.message})
     }
 }
+
 //get messages
-
-
+//TEST
 let body = {
     content: "hello",
     receiver: "user10",
