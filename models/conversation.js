@@ -5,7 +5,7 @@ const conversationModel = new Schema(
   {
     userOneId: { type: Schema.Types.ObjectId, ref: "User" },
     userTwoId: { type: Schema.Types.ObjectId, ref: "User" },
-    Messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
+    messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 
     },
     { timestamps: true }
