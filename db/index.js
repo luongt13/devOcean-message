@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 mongoose
     .connect("mongodb://127.0.0.1:27017/devOceanDatabase", {
@@ -6,15 +6,15 @@ mongoose
         useNewUrlParser: true,
     })
     .then(() => {
-        console.log("MongoDB Connected!");
+        console.log("MongoDB Connected!")
     })
     .catch((error) => {
-        console.log(error.message);
+        console.log(error.message)
     });
 
 // comment out in production
-mongoose.set("debug", true);
+mongoose.set("debug", true)
 
-const db = mongoose.connection;
+const db = mongoose.connection
 
-module.exports = db;
+module.exports = db
