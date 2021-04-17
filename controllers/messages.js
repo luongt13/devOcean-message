@@ -20,14 +20,11 @@ const createMessage = async (req,res) => {
         let foundSender = await User.findById(sender)
         //look for user receiver by email
         let foundReceiver = await User.findById(receiver)
-
         //// an array and it has to match for sender AND receiver 
         let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}})
-console.log(foundConversation)
         if (foundConversation.length === 0) {
               //if conversation is not found then create conversation
             let newConversation = await Conversation.create({users: [foundSender, foundReceiver], message: []})
-            console.log(newConversation)
             //add conversation id to each user
             await User.findByIdAndUpdate(
                 {_id: foundSender._id},
@@ -46,39 +43,34 @@ console.log(foundConversation)
         } else {
             //push new message into conversation messages
             let msg = await Message.create(newMessage)
-            console.log(msg)
             await Conversation.findByIdAndUpdate(
                 {_id: foundConversation[0]._id},
                 {$push: {messages: msg._id}},
                 {new: true}
             )
             return res.status(201).json(msg)
-
         }
-        } catch (err) {
-            return res.status(500).json({error: err.message})
-        }
+    } catch (err) {
+        return res.status(500).json({error: err.message})
     }
+}
 
 //get messages for specific sender and receiver 
 const getAllMessages = async (req,res) => {
     try {
-        //get based on the params id of the receiver (person they are sending message to)//conversation id???? find by your id and receiver id? 
         let {receiver, sender} = req.body
-
         // let foundReceiver = await User.findById(req.params.id)
         let foundReceiver = await User.findById(receiver)
         // let foundSender = await User.findById()
         let foundSender = await User.findById(sender)
-
         //find convo - where messages are stored 
         let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}}).populate("messages")
-console.log(foundConversation)
         //return conversation...message
         return res.status(200).json(foundConversation)
-        } catch (err) {
-            return res.status(500).json({error: err.message})
-        }
+    } catch (err) {
+        return res.status(500).json({error: err.message})
     }
+}
 
-module.exports = {createMessage, getAllMessages}
+
+module.exports = {createMessage, getAllMessages}+
