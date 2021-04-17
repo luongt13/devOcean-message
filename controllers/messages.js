@@ -21,9 +21,9 @@ const createMessage = async (req,res) => {
         //look for user receiver by email
         let foundReceiver = await User.findById(receiver)
 
-        //look in conversation for user id of person receiving it?  if id exists then push message to message//need to refactor as it needs to account for msg person has with other people...//maybe users in convo can be an array and it has to match for sender AND receiver 
+        //// an array and it has to match for sender AND receiver 
         let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}})
-
+console.log(foundConversation)
         if (foundConversation.length === 0) {
               //if conversation is not found then create conversation
             let newConversation = await Conversation.create({users: [foundSender, foundReceiver], message: []})
@@ -36,22 +36,25 @@ const createMessage = async (req,res) => {
             await User.findByIdAndUpdate(
                 {_id: foundReceiver._id},
                 {$push: {conversations: newConversation._id}})
-                            //push new message into conversation messages
+            //push new message into conversation messages
             let msg = await Message.create(newMessage)
             await Conversation.findByIdAndUpdate(
                 {_id: newConversation._id},
                 {$push: {messages: msg._id}}
                 )
+            return res.status(201).json(msg)
         } else {
             //push new message into conversation messages
             let msg = await Message.create(newMessage)
             console.log(msg)
             await Conversation.findByIdAndUpdate(
-                {_id: foundConversation._id},
-                {$push: {messages: msg._id}}
+                {_id: foundConversation[0]._id},
+                {$push: {messages: msg._id}},
+                {new: true}
             )
+            return res.status(201).json(msg)
+
         }
-        return res.status(201).json({msg})
         } catch (err) {
             return res.status(500).json({error: err.message})
         }
