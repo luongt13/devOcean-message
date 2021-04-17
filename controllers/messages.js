@@ -60,7 +60,7 @@ console.log(foundConversation)
         }
     }
 
-//get messages
+//get messages for specific sender and receiver 
 const getAllMessages = async (req,res) => {
     try {
         //get based on the params id of the receiver (person they are sending message to)//conversation id???? find by your id and receiver id? 
@@ -73,7 +73,7 @@ const getAllMessages = async (req,res) => {
 
         //find convo - where messages are stored 
         let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}}).populate("messages")
-
+console.log(foundConversation)
         //return conversation...message
         return res.status(200).json(foundConversation)
         } catch (err) {
