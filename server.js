@@ -1,19 +1,19 @@
-const express = require("express");
-const logger = require("morgan");
-const cors = require("cors");
-const PORT = process.env.PORT || 4567;
-const routes = require("./routes");
-const db = require("./db");
+const express = require("express")
+const logger = require("morgan")
+const cors = require("cors")
+const PORT = process.env.PORT || 4567
+const routes = require("./routes")
+const db = require("./db")
 
-db.on("error", console.error.bind(console, "error"));
+db.on("error", console.error.bind(console, "error"))
 
 const app = express();
 
-app.use(cors());
-app.use(logger("dev"));
-app.use(express.json());
-app.use("/api", routes);
+app.use(cors())
+app.use(logger("dev"))
+app.use(express.json())
+app.use("/api", routes)
 
 app.listen(PORT, () => {
-    console.log(`Express server listening on port ${PORT}`);
-});
+    console.log(`Express server listening on port ${PORT}`)
+})

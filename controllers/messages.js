@@ -72,5 +72,6 @@ const getAllMessages = async (req,res) => {
     }
 }
 
+//delete message
 
-module.exports = {createMessage, getAllMessages}+
+module.exports = {createMessage, getAllMessages}
