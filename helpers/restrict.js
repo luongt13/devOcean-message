@@ -8,7 +8,7 @@ const restrict = (req, res, next) => {
       res.locals.user = data
       next()
   } catch (error) {
-      res.status(403).send("Unathorized")
+      res.status(403).send("Unauthorized")
   }
 }
 
