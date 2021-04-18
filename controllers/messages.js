@@ -4,7 +4,6 @@ const Message = require("../models/message.js")
 const Conversation = require("../models/conversation.js")
 
 db.on("error", console.error.bind(console, "connection error"))
-
 //create message
 const createMessage = async (req,res) => {
     try {
@@ -54,7 +53,6 @@ const createMessage = async (req,res) => {
         return res.status(500).json({error: err.message})
     }
 }
-
 //get messages for specific sender and receiver 
 const getAllMessages = async (req,res) => {
     try {
@@ -71,7 +69,6 @@ const getAllMessages = async (req,res) => {
         return res.status(500).json({error: err.message})
     }
 }
-
 //delete message
 const deleteMessage = async (req, res) => {
   try {
@@ -86,7 +83,5 @@ const deleteMessage = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 }
-
-
 
 module.exports = { createMessage, getAllMessages, deleteMessage}
