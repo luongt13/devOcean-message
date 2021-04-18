@@ -1,5 +1,5 @@
 const {Router} = require("express")
-const userRouter = require("./users2.js")
+const userRouter = require("./users.js")
 const conversationRouter = require("./conversation.js")
 const messageRouter = require("./messages.js")
 
