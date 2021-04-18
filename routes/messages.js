@@ -1,5 +1,7 @@
 const {Router} = require("express")
-const {createMessage, getAllMessages, deleteMessage} = require("../controllers/messages.js")
+const { createMessage, getAllMessages, deleteMessage } = require("../controllers/messages.js")
+const restrict = require("../helpers/restrict.js")
+
 const router = Router()
 
 router.get("/", getAllMessages)

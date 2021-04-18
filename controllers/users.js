@@ -120,4 +120,17 @@ const getUser = async (req, res) => {
   }
 };
 
-module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser }
+const updateUser = async (req, res) => {
+  try {
+    let updatedUser = await User.findByIdAndUpdate(req.params.id, rec.body, { new: true })
+    if (updatedUser) {
+      return res.status(200).json(updatedUser)
+    } else {
+      return res.status(404).send("User not updated!")
+    }
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
+module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser }
