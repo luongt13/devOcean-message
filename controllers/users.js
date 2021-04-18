@@ -8,6 +8,7 @@ db.on("error", console.error.bind(console, "Mongo Connection Error:"));
 const SALT_ROUNDS = 11
 const TOKEN_KEY = "devoceanisthegreatestappever"
 
+//creating a user
 const signUp = async (req, res) => {
   try {
     const { name, email, password } = req.body
@@ -31,7 +32,7 @@ const signUp = async (req, res) => {
     return res.status(400).json({ error: error.message})
   }
 }
-
+//user signing in
 const signIn = async (req, res) => {
   const { name, password } = req.body
   
@@ -58,7 +59,7 @@ const signIn = async (req, res) => {
     return res.status(500).json({ error: error.message })
   }
 }
-
+//verify user
 const verify = async (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1]
@@ -70,7 +71,7 @@ const verify = async (req, res) => {
     res.status(401).send("Not Authorized")
   }
 }
-
+//change password
 const changePassword = async (req, res) => {
   try {
     let user = await User.findById(req.params.id)
