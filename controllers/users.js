@@ -14,7 +14,9 @@ const signUp = async (req, res) => {
     const { name, email, password } = req.body
     const password_digest = await bcrypt.hash(password, SALT_ROUNDS)
 
-    const user = new User({ name, email, password_digest })
+
+    const user = new User({ name, email, password_digest, imgURL, location, languages, professionalLink, about, conversations })
+    // or const user= await User.create(req.body) and remove the save 
     
     await user.save()
     const payload = {
@@ -97,4 +99,41 @@ const changePassword = async (req, res) => {
   }
 }
 
-module.exports = { signUp, signIn, verify, changePassword }
+const getUsers = async (req, res) => {
+  try {
+      const users = await User.find({});
+      return res.status(200).json(users);
+  } catch (error) {
+      return res.status(500).json({ error: error.message });
+  }
+};
+
+const getUser = async (req, res) => {
+  try {
+      const user = await User.findById(req.params.id);
+      if (user) {
+          return res.status(200).json(user);
+      } else {
+          return res
+              .status(404)
+              .send("Item with specified ID does not exist!");
+      }
+  } catch (error) {
+      return res.status(500).json({ error: error.message });
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    let updatedUser = await User.findByIdAndUpdate(req.params.id, rec.body, { new: true })
+    if (updatedUser) {
+      return res.status(200).json(updatedUser)
+    } else {
+      return res.status(404).send("User not updated!")
+    }
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
+module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser }
