@@ -73,5 +73,20 @@ const getAllMessages = async (req,res) => {
 }
 
 //delete message
+const deleteMessage = async (req, res) => {
+  try {
+    let deletedMessage = await Product.findByIdAndDelete(req.params.id)
+    // if message is found by id
+    if (deletedMessage) {
+      return res.status(200).json(deletedMessage)
+    } else {
+      return res.status(404).send("Message not deleted!")
+    }
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
 
-module.exports = {createMessage, getAllMessages}
+
+
+module.exports = { createMessage, getAllMessages, deleteMessage}
