@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { getUser } from "../../service/user.js"
 import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function UserProfile() {
   let [user, setUser] = useState({})
@@ -27,7 +28,13 @@ export default function UserProfile() {
         <p><strong>Job Title: </strong>{user.job}</p>
         <p><strong>Languages: </strong>{user.languages}</p>
       </div>
+      
       <p><strong>About Me:</strong> {user.about}</p>
+      
+      <Link to={`/messages/${id}`}>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Message-icon-grey.png" height={40} width={40} />
+        <h4>Message Me!</h4>
+        </Link>
     </div>
   )
 }
