@@ -23,11 +23,11 @@ export default function UserProfile() {
         <img src={user.imgURL} height={350} width={350} alt="profile pic" />
         <h1>{user.name}</h1>
         <p>{user.email}</p>
-        <p>{user.location}</p>
-        <p>{user.job}</p>
-        <p>{user.languages}</p>
+        <p><strong>Location: </strong>{user.location}</p>
+        <p><strong>Job Title: </strong>{user.job}</p>
+        <p><strong>Languages: </strong>{user.languages}</p>
       </div>
-      <p>{user.about}</p>
+      <p><strong>About Me:</strong> {user.about}</p>
     </div>
   )
 }

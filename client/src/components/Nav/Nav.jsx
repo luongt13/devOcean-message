@@ -6,7 +6,7 @@ export default function Nav() {
             <Link to="/users">Community</Link>
             <Link to="/messages">Messages</Link>
             <Link to="/my-profile">My Profile</Link>
-            <Link to="/">Sign out</Link>
+            <Link to="/sign-in">Sign out</Link>
         </div>
     )
 }
