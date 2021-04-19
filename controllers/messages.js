@@ -71,21 +71,18 @@ const createMessage = async (req,res) => {
 //get thread
 const getAllMessages = async (req,res) => {
     try {
-        // let user = await Conversation.findById(req.params.id)
+        // let user = await Conversation.findById(req.params.id).populate("users").populate("messages")
         let user = await Conversation.findById(req.params.id).populate({
             path: "messages",
             model: "Message",
-                // populate: {
-                // [{
-                //     path: "messages",
-                //     model: "Message"
-                // }],
-                // [{
-                //     path: "users",
-                //     model: "User"
-                // }]
-            // }
-        })
+            populate: [{
+                path: "sender",
+                model: "User",
+            }, {
+                path: "receiver",
+                model: "User"
+            }]
+        }).populate("users")
         return res.status(200).json(user)
     } catch (err) {
         return res.status(500).json({error: err.message})
@@ -94,7 +91,7 @@ const getAllMessages = async (req,res) => {
 //delete message
 const deleteMessage = async (req, res) => {
   try {
-    let deletedMessage = await Product.findByIdAndDelete(req.params.id)
+    let deletedMessage = await Message.findByIdAndDelete(req.params.id)
     // if message is found by id
     if (deletedMessage) {
       return res.status(200).json(deletedMessage)
@@ -106,4 +103,13 @@ const deleteMessage = async (req, res) => {
   }
 }
 
-module.exports = { createMessage, getAllMessages, deleteMessage}
+const findUser = async (req, res) => {
+    try {
+        console.log(req.body)
+        let users = await User.find({})
+        return res.status(200).json(users)
+    } catch (err) {
+        return res.status(500).json({error: err.message})
+    }
+}
+module.exports = { createMessage, getAllMessages, deleteMessage, findUser}

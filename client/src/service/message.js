@@ -23,10 +23,20 @@ export const getMessages = async (id) => {
 //create message
 export const createMessage = async (body) => {
     try {
-        let res = await api.post("/create", body)
+        let res = await api.post("/messages", body)
         return res.data
     }  catch (err) {
         throw err
     }
 }
 //delete message
+
+//find user by...name? 
+export const findUser = async (name) => {
+    try {
+        let res = await api.get("/messages", name)
+        return res.data
+    } catch (err) {
+        throw err
+    }
+}

@@ -1,4 +1,15 @@
 .message-detail {
-  border: 2px solid black;
-  width: 50%;
+    border: 2px solid black;
+    width: 50%;
+    border-radius: 30px;
+    background-color: aquamarine;
+    text-align: left;
+    padding: 10px;
+}
+
+.message-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
