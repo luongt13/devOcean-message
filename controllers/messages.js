@@ -91,7 +91,7 @@ const getAllMessages = async (req,res) => {
 //delete message
 const deleteMessage = async (req, res) => {
   try {
-    let deletedMessage = await Product.findByIdAndDelete(req.params.id)
+    let deletedMessage = await Message.findByIdAndDelete(req.params.id)
     // if message is found by id
     if (deletedMessage) {
       return res.status(200).json(deletedMessage)
