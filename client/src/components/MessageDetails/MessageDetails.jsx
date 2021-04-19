@@ -20,12 +20,15 @@ export default function MessageDetails() {
 //sort messages>
 //if sender is from user logged in then make it different somehow
     return (
-        <div className="message-detail">
+        <>
             {messages.map(item => {
                 return (
+                    <div className="message-detail">
                     <p>{item.content}</p>
+                    <h5>{item.sender.name}</h5>
+                    </div>
                 )
             })}
-        </div>
+        </>
     )
 }
