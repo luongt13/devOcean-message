@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react'
 import {useParams, Link} from "react-router-dom"
 import {getConversations} from "../../service/message"
 import MessageItem from "../Message/MessageItem.jsx"
-import {useToggle} from "../../hooks/useToggle"
 
 export default function MessageList() {
     let [conversations, setConversations] = useState()

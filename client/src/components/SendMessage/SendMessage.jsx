@@ -1,14 +1,30 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {createMessage} from "../../service/message"
+import "./SendMessage.css"
 
 export default function SendMessage(props) {
     console.log(props.users)
+
+    let sender = "6079fbc876ea7f675d84f734"
+    console.log(sender)
+    let receiver = "6079fbc876ea7f675d84f735"
+    console.log(receiver)
+    
     const [message, setMessage] = useState({
         content: "",
-        sender: "",
-        receiver: ""
+        sender: sender,
+        receiver: receiver
     })
 
+    // if(props.users) {
+    //     return (
+    //         props.users.map(item => {
+    //             console.log(item._id)
+    //         })
+    //     )
+    // }
+    //test
+    
     function handleChange(event) {
         setMessage((prevState) => ({
             ...prevState,

@@ -5,7 +5,9 @@ const restrict = require("../helpers/restrict.js")
 const router = Router()
 
 router.get("/:id", getAllMessages)
-router.post("/", restrict, createMessage)
+router.post("/", createMessage)
+// router.post("/", restrict, createMessage)
+
 router.delete("/:id", restrict, deleteMessage)
 
 module.exports = router

@@ -24,7 +24,7 @@ export default function MessageDetails() {
 //sort messages>
 //if sender is from user logged in then make it different somehow
     return (
-        <>
+        <div className="message-page">
             {messages.map(item => {
                 return (
                     <div className="message-detail" key={item._id}>
@@ -34,6 +34,6 @@ export default function MessageDetails() {
                 )
             })}
             <SendMessage users={users} setToggle={toggle}/>
-        </>
+        </div>
     )
 }

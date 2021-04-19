@@ -6,3 +6,10 @@
     text-align: left;
     padding: 10px;
 }
+
+.message-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
