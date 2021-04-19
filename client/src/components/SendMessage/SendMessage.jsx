@@ -40,7 +40,7 @@ export default function SendMessage(props) {
     //sender is user that is logged in...
     return (
         <form className="send-message" onChange={handleChange} onSubmit={handleSubmit}>
-            <input type="text" value={message.content}placeholder="Type message..."/>
+            <input type="text" value={message.content}placeholder="Type a message..."/>
             <button type="submit">Send</button>
         </form>
     )

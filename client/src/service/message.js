@@ -30,3 +30,13 @@ export const createMessage = async (body) => {
     }
 }
 //delete message
+
+//find user by...name? 
+export const findUser = async (name) => {
+    try {
+        let res = await api.get("/messages", name)
+        return res.data
+    } catch (err) {
+        throw err
+    }
+}
