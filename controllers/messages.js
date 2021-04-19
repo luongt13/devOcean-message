@@ -106,7 +106,7 @@ const deleteMessage = async (req, res) => {
 const findUser = async (req, res) => {
     try {
         console.log(req.body)
-        let users = await User.find({name: req.body})
+        let users = await User.find({})
         return res.status(200).json(users)
     } catch (err) {
         return res.status(500).json({error: err.message})

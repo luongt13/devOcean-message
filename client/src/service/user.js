@@ -1,4 +1,6 @@
+import axios from "axios";
 import api from "./apiConfig.js"
+const apiURL = "http://localhost:4567/api"
 
 export const signUp = async (credentials) => {
     try {
@@ -27,6 +29,18 @@ export const verifyUser = async () => {
     } else {
         return false;
     }
+}
+
+export const getUsers = async () => {
+  const response = await axios.get(`${apiURL}/users`)
+  const users = response.data
+  return users
+}
+
+export const getUser = async (id) => {
+  const response = await axios.get(`${apiURL}/users/${id}`)
+  const user = response.data
+  return user
 }
 
 //edit user
