@@ -19,8 +19,8 @@ function UserList() {
     <div>
       {users.map((user) => {
         return (
-          <div className="user-container">
-            <Link to={`/users/${user._id}`}>
+          <div className="user-container" key={user._id}>
+            <Link to={`/users/${user._id}`} key={user._id}>
               <img src={user.imgURL} height={150} width={150} alt="profile pic" />
               <h3>{user.name}</h3>
             </Link>
