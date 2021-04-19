@@ -57,9 +57,7 @@ const createMessage = async (req,res) => {
 const getAllMessages = async (req,res) => {
     try {
         let {receiver, sender} = req.body
-        // let foundReceiver = await User.findById(req.params.id)
         let foundReceiver = await User.findById(receiver)
-        // let foundSender = await User.findById()
         let foundSender = await User.findById(sender)
         //find convo - where messages are stored 
         let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}}).populate("messages")

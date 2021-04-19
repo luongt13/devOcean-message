@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Message() {
+export default function MessageThread() {
     return (
         <div>
             
