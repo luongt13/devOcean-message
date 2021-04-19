@@ -4,7 +4,6 @@ const Message = require("../models/message.js")
 const Conversation = require("../models/conversation.js")
 
 db.on("error", console.error.bind(console, "connection error"))
-
 //get all conversations based on the user logged in? 
 const getAllConversations = async (req,res) => {
     try {

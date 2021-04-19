@@ -4,5 +4,4 @@ const router = Router()
 
 router.get("/:id", getAllConversations)
 
-
 module.exports = router

@@ -4,7 +4,6 @@ const Message = require("../models/message.js")
 const Conversation = require("../models/conversation.js")
 
 db.on("error", console.error.bind(console, "connection error"))
-
 //create message
 const createMessage = async (req,res) => {
     try {
@@ -54,7 +53,6 @@ const createMessage = async (req,res) => {
         return res.status(500).json({error: err.message})
     }
 }
-
 //get messages for specific sender and receiver 
 const getAllMessages = async (req,res) => {
     try {
@@ -71,7 +69,19 @@ const getAllMessages = async (req,res) => {
         return res.status(500).json({error: err.message})
     }
 }
-
 //delete message
+const deleteMessage = async (req, res) => {
+  try {
+    let deletedMessage = await Product.findByIdAndDelete(req.params.id)
+    // if message is found by id
+    if (deletedMessage) {
+      return res.status(200).json(deletedMessage)
+    } else {
+      return res.status(404).send("Message not deleted!")
+    }
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
 
-module.exports = {createMessage, getAllMessages}
+module.exports = { createMessage, getAllMessages, deleteMessage}
