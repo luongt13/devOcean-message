@@ -10,9 +10,9 @@ export const getConversations = async (id) => {
     }
 }
 //get messages for a user thread
-export const getMessages = async (body) => {
+export const getMessages = async (id) => {
     try {
-        let res = await api.get("/messages", body)
+        let res = await api.get(`/messages/${id}`)
         return res.data
 
     } catch (err) {

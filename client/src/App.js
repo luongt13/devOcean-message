@@ -20,10 +20,10 @@ function App() {
       <Route>
         {/* user profile*/}
       </Route>
-      <Route path="/messages/:id">
+      <Route exact path="/messages/:id">
         <MessageList/>
       </Route>
-      <Route path="/details/:id">
+      <Route exact path="/details/:id">
         <MessageDetails/>
       </Route>
     </div>
