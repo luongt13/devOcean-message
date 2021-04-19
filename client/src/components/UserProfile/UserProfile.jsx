@@ -1,4 +1,4 @@
-import React from "react"
+
 import { useEffect, useState } from "react"
 import { getUser } from "../../service/user.js"
 import { useParams } from "react-router-dom"
