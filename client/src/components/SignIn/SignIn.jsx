@@ -28,6 +28,13 @@ export default function SignIn(props) {
     <div>
       <h3>Sign In</h3>
       <form onChange={handleChange} onSubmit={handleSubmit}>
+      <label>Name</label>
+        <input
+          type="name"
+          name="name"
+          value={input.name}
+          placeholder="Enter name..."
+        />
         <label>Email</label>
         <input
           type="email"

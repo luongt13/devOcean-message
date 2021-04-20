@@ -11,9 +11,9 @@ const TOKEN_KEY = "devoceanisthegreatestappever"
 //creating a user
 const signUp = async (req, res) => {
   try {
-    const { name, email, password } = req.body
+    const { name, email, password, job, imgURL, location, languages, professionalLink, about } = req.body
     const password_digest = await bcrypt.hash(password, SALT_ROUNDS)
-    const user = new User({ name, email, password_digest, imgURL, location, languages, professionalLink, about, conversations })
+    const user = new User({ name, email, password_digest, job, imgURL, location, languages, professionalLink, about })
     // or const user= await User.create(req.body) and remove the save 
     
     await user.save()
