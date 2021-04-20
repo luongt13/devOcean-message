@@ -90,26 +90,18 @@ const getAllMessages = async (req,res) => {
 }
 //delete message
 const deleteMessage = async (req, res) => {
-  try {
+    try {
     let deletedMessage = await Message.findByIdAndDelete(req.params.id)
     // if message is found by id
+    await Conversation.findByIdAndUpdate({_id: deleteMessage.user_id}, {$pull: {posts: post._id}})
     if (deletedMessage) {
-      return res.status(200).json(deletedMessage)
+        return res.status(200).json(deletedMessage)
     } else {
-      return res.status(404).send("Message not deleted!")
+        return res.status(404).send("Message not deleted!")
     }
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
 }
 
-const findUser = async (req, res) => {
-    try {
-        console.log(req.body)
-        let users = await User.find({})
-        return res.status(200).json(users)
-    } catch (err) {
-        return res.status(500).json({error: err.message})
-    }
-}
-module.exports = { createMessage, getAllMessages, deleteMessage, findUser}
+module.exports = { createMessage, getAllMessages, deleteMessage}

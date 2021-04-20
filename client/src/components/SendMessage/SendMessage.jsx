@@ -5,9 +5,10 @@ import "./SendMessage.css"
 
 export default function SendMessage(props) {
     // let {id} = useParams()
-    let sender = "6079fbc876ea7f675d84f734"
-    let receiver = "6079fbc876ea7f675d84f735"
-    
+    let receiver = "6079fbc876ea7f675d84f734"
+    // let receiver = "6079fbc876ea7f675d84f735"
+    let sender = "6079fbc876ea7f675d84f735"
+
     let defaultInput = {
         content: "",
         sender: sender,
@@ -21,7 +22,6 @@ export default function SendMessage(props) {
             content: event.target.value
         }))
     }
-console.log(message)
     async function handleSubmit(event) {
         event.preventDefault()
         await createMessage(message)

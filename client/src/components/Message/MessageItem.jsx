@@ -14,7 +14,7 @@ export default function MessageItem(props) {
                     </div>
                 )
             })}
-             {/* {props.conversation.users.map(user => {
+            {/* {props.conversation.users.map(user => {
                 return (
                     <div>
                         <h4>{user.name}</h4>
