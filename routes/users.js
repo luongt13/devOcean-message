@@ -8,7 +8,7 @@ router.get("/users", getUsers)
 router.get("/users/:id", getUser)
 router.post("/sign-up", signUp)
 router.put("/users/:id", restrict, updateUser)
-router.get(":/verify", verify)
+router.get("/verify", verify)
 router.post("/sign-in", signIn)
 
 module.exports = router
