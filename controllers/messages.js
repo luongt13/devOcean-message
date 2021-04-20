@@ -76,17 +76,14 @@ const getAllMessages = async (req,res) => {
         let user = await Conversation.findById(req.params.id).populate({
             path: "messages",
             model: "Message",
-                // populate: {
-                // [{
-                //     path: "messages",
-                //     model: "Message"
-                // }],
-                // [{
-                //     path: "users",
-                //     model: "User"
-                // }]
-            // }
-        })
+              populate: [{
+                path: "sender",
+                model: "User",
+            }, {
+                path: "receiver",
+                model: "User"
+            }]
+        }).populate("users")
         return res.status(200).json(user)
     } catch (err) {
         return res.status(500).json({error: err.message})

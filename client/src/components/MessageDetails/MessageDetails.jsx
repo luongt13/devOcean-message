@@ -7,7 +7,6 @@ import {useToggle} from "../../hooks/useToggle"
 
 export default function MessageDetails(props) {
     const [isToggled, toggle] = useToggle(false)
-
     const [messages, setMessages] = useState([])
     const [users, setUsers] = useState()
     let {id} = useParams()
@@ -15,12 +14,14 @@ export default function MessageDetails(props) {
     useEffect(() => {
         getData()
     }, [isToggled])
-console.log(messages)
+    
     const getData = async () => {
         const data = await getMessages(id)
         setMessages(data.messages)
         setUsers(data.users)
     }
+
+    console.log(users)
 //sort messages>
 //if sender is from user logged in then make it different somehow
     return (
