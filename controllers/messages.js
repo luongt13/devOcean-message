@@ -15,6 +15,7 @@ const createMessage = async (req,res) => {
             receiver,
             sender,
         }
+        console.log(req.body)
         //look for user sender by email
         let foundSender = await User.findById(sender)
         //look for user receiver by email
