@@ -4,10 +4,12 @@ import {useHistory} from "react-router-dom"
 
 export default function SignIn(props) {
   const defaultInput = {
+    name: "",
     email: "",
     password: "",
   };
 
+  const history = useHistory();
   const [input, setInput] = useState(defaultInput);
 
   let history = useHistory()
