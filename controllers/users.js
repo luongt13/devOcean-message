@@ -125,7 +125,7 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    let updatedUser = await User.findByIdAndUpdate(req.params.id, rec.body, { new: true })
+    let updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
     if (updatedUser) {
       return res.status(200).json(updatedUser)
     } else {

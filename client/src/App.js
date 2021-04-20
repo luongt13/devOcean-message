@@ -4,6 +4,7 @@ import UserList from "./components/UserList/UserList.jsx"
 import UserProfile from "./components/UserProfile/UserProfile.jsx"
 import MessageList from "./components/MessageList/MessageList.jsx"
 import MessageDetails from "./components/MessageDetails/MessageDetails.jsx"
+import UpdateUser from "./components/UpdateUser/UpdateUser.jsx"
 
 import {Route} from "react-router-dom"
 function App() {
@@ -21,6 +22,9 @@ function App() {
       </Route>
       <Route path="/users/:id">
         <UserProfile />
+      </Route>
+      <Route path="/update-user/:id">
+        <UpdateUser />
       </Route>
       <Route exact path="/messages/:id">
         <MessageList/>

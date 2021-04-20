@@ -31,10 +31,10 @@ export default function SignUp(props) {
     <div>
       <h3>Sign Up</h3>
       <form onChange={handleChange} onSubmit={handleSubmit}>
-        <label>Username</label>
+        <label>Name</label>
         <input
-          name="username"
-          value={input.username}
+          name="name"
+          value={input.name}
           placeholder="Enter username..."
         />
         <label>Email</label>
