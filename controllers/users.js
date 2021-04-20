@@ -33,7 +33,6 @@ const signUp = async (req, res) => {
 //user signing in
 const signIn = async (req, res) => {
   const { name, password } = req.body
-  
   try {
     const user = await User.findOne({ name: name })
     if (user) {
@@ -42,19 +41,16 @@ const signIn = async (req, res) => {
           name: user.name,
           email: user.email,
         }
-      
         const token = jwt.sign(payload, TOKEN_KEY)
-  
         return res.status(200).json({ token, payload })
-  
       } else {
-        res.status(401).send("Invalid Credentials")
+          res.status(401).send("Invalid Credentials")
       }
     } else {
-      res.status(400).send("User does not exist")
+        res.status(400).send("User does not exist")
     }
   } catch (error) {
-    return res.status(500).json({ error: error.message })
+      return res.status(500).json({ error: error.message })
   }
 }
 //verify user
@@ -66,7 +62,7 @@ const verify = async (req, res) => {
       return res.json(payload)
     }
   } catch (error) {
-    res.status(401).send("Not Authorized")
+      res.status(401).send("Not Authorized")
   }
 }
 //change password
@@ -86,7 +82,6 @@ const changePassword = async (req, res) => {
         name: user.name,
         email: user.email
       }
-
       const token = jwt.sign(payload, TOKEN_KEY)
       return res.status(201).json({ user, token })
     } else {
@@ -112,9 +107,7 @@ const getUser = async (req, res) => {
       if (user) {
           return res.status(200).json(user);
       } else {
-          return res
-              .status(404)
-              .send("Item with specified ID does not exist!");
+          return res.status(404).send("Item with specified ID does not exist!");
       }
   } catch (error) {
       return res.status(500).json({ error: error.message });
@@ -137,17 +130,14 @@ const updateUser = async (req, res) => {
 const findUser = async (req, res) => {
   try {
     const user = await User.findOne(req.body)
-    console.log(user)
-    console.log(req.body)
     if (user) {
         return res.status(200).json(user)
     } else {
-        return res
-            .status(404).send("User not found")
+        return res.status(404).send("User not found")
     }
-} catch (error) {
-    return res.status(500).json({ error: error.message })
-}
+  } catch (error) {
+      return res.status(500).json({ error: error.message })
+  }
 }
 
 module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser, findUser }
