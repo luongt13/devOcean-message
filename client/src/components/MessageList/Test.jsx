@@ -14,9 +14,9 @@ export default function Test(props) {
     const [messages, setMessages] = useState([])
     const [users, setUsers] = useState()
     // let {id} = useParams()
-    // useEffect(() => {
-    //     getData()
-    // }, [isToggled])
+    useEffect(() => {
+        getData()
+    }, [isToggled])
 
     const getData = async () => {
         const data = await getMessages(props.conversation._id)
@@ -25,8 +25,10 @@ export default function Test(props) {
     }
 
     function handleClick() {
-        getData()
-        toggle()
+        // getData()
+        props.setTest(messages)
+        props.setToggle()
+        // toggle()
     }
 
 console.log(messages)
@@ -45,7 +47,7 @@ console.log(messages)
             )
         })}
     </div>
-    <div className="test-page">
+    {/* <div className="test-page">
 
         {isToggled && messages.length > 0 ?  
             <>
@@ -61,7 +63,7 @@ console.log(messages)
             </>
             : null
         }
-    </div>
+    </div> */}
 
     </>    
     )
