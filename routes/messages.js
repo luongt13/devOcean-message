@@ -10,6 +10,6 @@ router.post("/", createMessage)
 
 router.delete("/:id", restrict, deleteMessage)
 
-router.get("/", findUser)
+// router.get("/", findUser)
 
 module.exports = router

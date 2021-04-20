@@ -28,7 +28,6 @@ export default function UpdateUser() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await updateUser(input);
-    let res = await updateUser(input);
     history.push(`/users`)
   };
 

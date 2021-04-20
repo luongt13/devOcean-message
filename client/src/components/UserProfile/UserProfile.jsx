@@ -21,7 +21,7 @@ export default function UserProfile() {
   return (
     <div>
       <Link to={`/update-user/${id}`}>
-        <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} /></div>
+        <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} alt={"edit profile icon"} /></div>
       </Link>
         <div>
         <img src={user.imgURL} height={350} width={350} alt="profile pic" />
@@ -30,12 +30,15 @@ export default function UserProfile() {
         <p><strong>Location: </strong>{user.location}</p>
         <p><strong>Job Title: </strong>{user.job}</p>
         <p><strong>Languages: </strong>{user.languages}</p>
+        <a href={`${user.professionalLink}`}>
+          <img src="https://image.flaticon.com/icons/png/512/61/61109.png" height={40} width={40} alt={"linkedin icon"} />
+        </a>
       </div>
       
       <p><strong>About Me:</strong> {user.about}</p>
       
       <Link to={`/messages/${id}`}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Message-icon-grey.png" height={40} width={40} />
+        <img src="http://cdn.onlinewebfonts.com/svg/img_125115.png" height={40} width={40} alt={"message icon"} />
         <h4>Message Me!</h4>
         </Link>
     </div>
