@@ -10,3 +10,4 @@ export default function Nav() {
         </div>
     )
 }
+// add an edit profile link ? 
