@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react"
 import { getUsers } from "../../service/user"
 import { Link } from "react-router-dom";
-import Fuse from "fuse.js"
+import Search from "../../components/Search/Search.jsx"
+import User from "../../components/User/User.jsx"
 
 function UserList() {
-  // let [query, setQuery] = useState('')
   let [users, setUsers] = useState([])
-
-  // const fuse = new Fuse(users, {
-  //   keys: [
-  //     'name',
-  //     'job',
-  //     'location'
-  //   ],
-  //   includeScore: true
-  // })
-
-  // const results = fuse.search(query)
-  // const userResults = query ? results.map(result => result.item) : users
+  let [filteredUsers, setFilteredUsers] = useState([]);
+  let [currentUser, setCurrentUser] = useState({});
+  let [searchTerm, setSearchTerm] = useState(""); 
 
   useEffect(() => {
     getData()
   }, [])
+
+  useEffect(() => {
+    if (
+      filteredUsers.length === 0 &&
+      searchTerm === "" &&
+      users.length !== 0 
+    ) {
+      setFilteredUsers(users)
+    }
+  }, [filteredUsers, searchTerm, users])
 
   async function getData() {
     let data = await getUsers()
@@ -29,22 +30,38 @@ function UserList() {
     setUsers(data)
   }
 
-  // function handleChange({ currentTarget }) {
-  //   const { value } = currentTarget
-  //   setQuery(value)
-  // }
+  function handleClick(e) {
+    let found = users.find((user) => {
+      return user.id === e.target.id
+    })
 
+    setCurrentUser(found)
+    setSearchTerm("")
+    setFilteredUsers(users)
+  }
 
   return (
     <div>
-      <label htmlFor='search'>Search</label>
-      <input
-        type='text'
-        name='search'
-        id='search'
-        // value={query}
-        // onChange={handleChange}
-      />
+      <div className="search-bar">
+        <Search
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          setUsers={setUsers}
+          users={users}
+          setFilteredUsers={setFilteredUsers}
+        />
+        {filteredUsers.map((user) => {
+          return (
+            <p onClick={handleClick} id={user.id} key={user.id}>
+              {user.name}
+            </p>
+          )
+        })}
+      </div>
+
+      <div>
+        <User currentUser={currentUser} />
+      </div>
 
       <div>
         {users.map((user) => {

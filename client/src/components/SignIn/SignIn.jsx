@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { signIn } from "../../service/user";
+import { useHistory } from "react-router-dom"
+
 
 export default function SignIn(props) {
   const defaultInput = {
+    name: "",
     email: "",
     password: "",
   };
 
+  const history = useHistory();
   const [input, setInput] = useState(defaultInput);
 
   const handleChange = (event) => {
@@ -21,6 +25,7 @@ export default function SignIn(props) {
     e.preventDefault();
     let res = await signIn(input);
     props.setCurrentUser(res.payload);
+    history.push(`/users`)
   };
 
   return (
