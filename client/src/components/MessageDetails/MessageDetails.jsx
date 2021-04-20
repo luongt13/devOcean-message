@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react'
 import {useParams} from "react-router-dom"
 import {getMessages} from "../../service/message"
 import SendMessage from "../SendMessage/SendMessage.jsx"
-// import MessageList from "../MessageList/MessageList.jsx"
 import "./MessageDetails.css"
 import {useToggle} from "../../hooks/useToggle"
 
@@ -11,8 +10,8 @@ export default function MessageDetails() {
 
     const [messages, setMessages] = useState([])
     const [users, setUsers] = useState()
-    console.log(users)
     let {id} = useParams()
+
     useEffect(() => {
         getData()
     }, [isToggled])
@@ -26,7 +25,6 @@ export default function MessageDetails() {
 //if sender is from user logged in then make it different somehow
     return (
         <div className="message-page">
-            {/* <MessageList/> */}
             {messages.map(item => {
                 return (
                     <div className="message-detail" key={item._id}>

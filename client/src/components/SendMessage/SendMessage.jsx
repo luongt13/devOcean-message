@@ -4,14 +4,13 @@ import {createMessage} from "../../service/message"
 import "./SendMessage.css"
 
 export default function SendMessage(props) {
-console.log(props.users)
-    let {id} = useParams()
-    // let sender = "6079fbc876ea7f675d84f734"
+    // let {id} = useParams()
+    let sender = "6079fbc876ea7f675d84f734"
     let receiver = "6079fbc876ea7f675d84f735"
     
     let defaultInput = {
         content: "",
-        sender: id,
+        sender: sender,
         receiver: receiver
     }
     const [message, setMessage] = useState(defaultInput)
@@ -22,12 +21,11 @@ console.log(props.users)
             content: event.target.value
         }))
     }
-
+console.log(message)
     async function handleSubmit(event) {
         event.preventDefault()
         await createMessage(message)
-        // props.setToggle()
-        props.setReload(prevState => !prevState)
+        props.setToggle()
         setMessage(defaultInput)
     }
     //sender is user that is logged in...
