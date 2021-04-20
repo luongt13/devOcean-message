@@ -32,6 +32,7 @@ export const verifyUser = async () => {
 export const findUser = async (body) => {
     try {
         const res = await api.get("/user", body)
+        console.log(body)
         return res.data
     } catch (err) {
         throw err

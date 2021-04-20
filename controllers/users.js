@@ -141,8 +141,7 @@ const findUser = async (req, res) => {
         return res.status(200).json(user);
     } else {
         return res
-            .status(404)
-            .send("Item with specified ID does not exist!");
+            .status(404).send("User not found");
     }
 } catch (error) {
     return res.status(500).json({ error: error.message });

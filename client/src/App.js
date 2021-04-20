@@ -10,12 +10,14 @@ import { useState, useEffect } from "react"
 import { verifyUser, findUser } from "./service/user"
 import SignUp from "./components/SignUp/SignUp.jsx"
 import SignIn from "./components/SignIn/SignIn.jsx"
-import {Route} from "react-router-dom"
+import {Route, useHistory} from "react-router-dom"
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null)
+  const [email, setEmail] = useState(null)
   const [userData, setUserData] = useState(null)
 
+  let history = useHistory()
   const logout = async () => {
     await localStorage.clear()
     setCurrentUser(null)
@@ -23,21 +25,31 @@ function App() {
 
   useEffect(() => {
     requestVerification()
-    getUserData()
   }, [])
 
   const requestVerification = async () => {
-    const user = await verifyUser();
+    const user = await verifyUser()
     setCurrentUser(user)
-    setUserData(user.email)
+    setEmail(user.email)
   }
 
   async function getUserData() {
-      let res = await findUser(userData)
-      setUserData(res._id)
-    }
+    let res = await findUser({email: email})
+    console.log(res)
+    setUserData(res._id)
+  }
+
+  console.log(email)
   console.log(userData)
-  console.log(currentUser)
+  if(email) {
+    getUserData()
+
+  }
+    if(userData) {
+      history.push("/users")
+    }
+  
+  
   return (
     <div className="App">
       <Nav currentUser={currentUser} logout={logout} userData={userData}/>
@@ -56,7 +68,7 @@ function App() {
       <Route path="/update-user/:id">
         <UpdateUser />
       </Route>
-      <Route exact path="/messages/:id">
+      <Route path="/messages/:id">
         <MessageList/>
       </Route>
       <Route path="/details/:id">
