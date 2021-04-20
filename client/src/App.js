@@ -21,6 +21,7 @@ function App() {
   const logout = async () => {
     await localStorage.clear()
     setCurrentUser(null)
+    history.push("/sign-in")
   }
 
   useEffect(() => {
@@ -38,7 +39,6 @@ function App() {
     console.log(res)
     setUserData(res._id)
   }
-  console.log(userData)
     if(email) {
       getUserData()
     }
@@ -72,7 +72,7 @@ function App() {
         <MessageDetails userData={userData}/>
       </Route>
     </div>
-  );
+  )
 }
 
 export default App;

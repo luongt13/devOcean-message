@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-      //needed for auth 
+    //needed for auth 
     name: { type: String, required: true },
     email: { type: String, required: true },
     password_digest: { type: String, required: true },

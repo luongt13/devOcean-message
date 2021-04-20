@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { signIn } from "../../service/user";
-import { useHistory } from "react-router-dom"
-
+import { useState } from "react"
+import { signIn } from "../../service/user"
+import {useHistory} from "react-router-dom"
 
 export default function SignIn(props) {
   const defaultInput = {
@@ -13,23 +12,24 @@ export default function SignIn(props) {
   const history = useHistory();
   const [input, setInput] = useState(defaultInput);
 
+  let history = useHistory()
+
   const handleChange = (event) => {
-    let { name, value } = event.target;
+    let { name, value } = event.target
     setInput((prevInput) => ({
       ...prevInput,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    let res = await signIn(input);
-    props.setCurrentUser(res.payload);
-    history.push(`/users`)
-  };
+    e.preventDefault()
+    let res = await signIn(input)
+    props.setCurrentUser(res.payload)
+    history.push("/users")
+  }
 
   return (
-
     <div>
       <h3>Sign In</h3>
       <form onChange={handleChange} onSubmit={handleSubmit}>

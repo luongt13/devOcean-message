@@ -13,11 +13,9 @@ export default function CreateMessage(props) {
         receiver: "",
     })
 
-
-    // function handleSearch() {
-
-    // }
-
+    function handleSearch() {
+        
+    }
     function handleChange(event) {
         let {id, value} = event.target
         setFormInput((prevState) => ({
@@ -35,7 +33,7 @@ export default function CreateMessage(props) {
             <div className="input">
                 <Search/>
             </div>
-            {/* <input name="receiver" value={formInput.receiver} type="text" onChange={handleSearch}  placeholder="To"/> */}
+            <input name="receiver" value={formInput.receiver} type="text" onChange={handleSearch}  placeholder="To"/>
             <div className="input">
                     <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
                 <button type="submit">Send</button>
