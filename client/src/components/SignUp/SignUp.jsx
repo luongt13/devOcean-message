@@ -7,6 +7,12 @@ export default function SignUp(props) {
     email: "",
     password: "",
     passwordConfirmation: "",
+    imgURL: "",
+    location: "",
+    job: "",
+    languages: "",
+    professionalLink: "",
+    about: "",
   };
 
   const [input, setInput] = useState(defaultInput);
