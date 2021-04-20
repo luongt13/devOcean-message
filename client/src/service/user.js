@@ -29,6 +29,15 @@ export const verifyUser = async () => {
     }
 }
 
+export const findUser = async (body) => {
+    try {
+        const res = await api.get("/user", body)
+        return res.data
+    } catch (err) {
+        throw err
+    }
+}
+
 export const getUsers = async () => {
   const response = await api.get("/users")
   const users = response.data

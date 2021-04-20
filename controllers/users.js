@@ -134,4 +134,19 @@ const updateUser = async (req, res) => {
   }
 }
 
-module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser }
+const findUser = async (req, res) => {
+  try {
+    const user = await User.findOne(req.body);
+    if (user) {
+        return res.status(200).json(user);
+    } else {
+        return res
+            .status(404)
+            .send("Item with specified ID does not exist!");
+    }
+} catch (error) {
+    return res.status(500).json({ error: error.message });
+}
+}
+
+module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser, findUser }

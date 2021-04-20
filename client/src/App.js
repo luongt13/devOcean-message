@@ -7,13 +7,14 @@ import MessageDetails from "./components/MessageDetails/MessageDetails.jsx"
 import UpdateUser from "./components/UpdateUser/UpdateUser.jsx"
 
 import { useState, useEffect } from "react"
-import { verifyUser } from "./service/user"
+import { verifyUser, findUser } from "./service/user"
 import SignUp from "./components/SignUp/SignUp.jsx"
 import SignIn from "./components/SignIn/SignIn.jsx"
 import {Route} from "react-router-dom"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [userData, setUserData] = useState(null)
 
   const logout = async () => {
     await localStorage.clear()
@@ -21,17 +22,25 @@ function App() {
   }
 
   useEffect(() => {
-    requestVerification();
+    requestVerification()
+    getUserData()
   }, [])
 
   const requestVerification = async () => {
     const user = await verifyUser();
-    setCurrentUser(user);
+    setCurrentUser(user)
+    setUserData(user.email)
   }
-  
+
+  async function getUserData() {
+      let res = await findUser(userData)
+      setUserData(res._id)
+    }
+  console.log(userData)
+  console.log(currentUser)
   return (
     <div className="App">
-      <Nav currentUser={currentUser} logout={logout}/>
+      <Nav currentUser={currentUser} logout={logout} userData={userData}/>
       <Route path="/sign-in">
         <SignIn setCurrentUser={setCurrentUser} />
       </Route>
