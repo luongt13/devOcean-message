@@ -7,11 +7,12 @@ export default function SendMessage(props) {
     let sender = "6079fbc876ea7f675d84f734"
     let receiver = "6079fbc876ea7f675d84f735"
     
-    const [message, setMessage] = useState({
+    let defaultInput = {
         content: "",
         sender: sender,
         receiver: receiver
-    })
+    }
+    const [message, setMessage] = useState(defaultInput)
     
     function handleChange(event) {
         setMessage((prevState) => ({
@@ -24,6 +25,7 @@ export default function SendMessage(props) {
         event.preventDefault()
         await createMessage(message)
         props.setToggle()
+        setMessage(defaultInput)
     }
     //sender is user that is logged in...
     return (

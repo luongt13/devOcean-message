@@ -5,6 +5,7 @@ import SendMessage from "../SendMessage/SendMessage.jsx"
 // import MessageList from "../MessageList/MessageList.jsx"
 // import "./MessageDetails.css"
 import {useToggle} from "../../hooks/useToggle"
+import "./Test.css"
 
 export default function Test(props) {
     // console.log(props.conversation)
@@ -25,31 +26,15 @@ export default function Test(props) {
 
     function handleClick() {
         getData()
-
+        toggle()
     }
 
-function handleDisplay() {
-    return (
-        <div className="message-page">
-        {messages.map(item => {
-            return (
-                <div className="message-detail" key={item._id}>
-                <p>{item.content}</p>
-                <h5>{item.sender.name}</h5>
-                </div>
-            )
-        })}
-        <SendMessage users={users} setToggle={toggle}/>
-    </div>
-    )
-}
-    // console.log(messages)
-
+console.log(messages)
 //sort messages>
 //if sender is from user logged in then make it different somehow
     return (
 <>
-        <div className="message-item">
+        <div className="test-item">
         {props.conversation.users.map(user => {
             return (
 
@@ -60,7 +45,24 @@ function handleDisplay() {
             )
         })}
     </div>
-    {handleDisplay()}
+    <div className="test-page">
+
+        {isToggled && messages.length > 0 ?  
+            <>
+            {messages.map(item => {
+                return (
+                    <div className="message-detail" key={item._id}>
+                    <p>{item.content}</p>
+                    <h5>{item.sender.name}</h5>
+                    </div>
+                )
+            })}
+            <SendMessage users={users} setToggle={toggle}/> 
+            </>
+            : null
+        }
+    </div>
+
     </>    
     )
 }

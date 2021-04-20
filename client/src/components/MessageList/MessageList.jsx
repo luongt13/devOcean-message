@@ -25,6 +25,9 @@ export default function MessageList() {
         <div className="message-list">
             <h1>Messages</h1>
             <button onClick={toggle}>Start A Conversation</button>
+            <div>
+                Hello
+            </div>
             {isToggled ? <CreateMessage setToggle={toggle}/> : null}
             {conversations ? conversations.map(item => {
                 return (
@@ -34,6 +37,7 @@ export default function MessageList() {
                 )
             }): <h1>No Conversations</h1>}
 
+            
             {/* {conversations ? conversations.map(item => {
                 return (
                     <div key={item._id} >
