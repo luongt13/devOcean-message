@@ -5,7 +5,7 @@ const restrict = require("../helpers/restrict.js")
 const router = Router()
 
 router.get("/users", getUsers)
-router.get("/user", findUser)
+router.post("/user", findUser)
 
 router.get("/users/:id", getUser)
 router.post("/sign-up", signUp)

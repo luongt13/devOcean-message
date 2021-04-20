@@ -38,17 +38,14 @@ function App() {
     console.log(res)
     setUserData(res._id)
   }
-
-  console.log(email)
   console.log(userData)
-  if(email) {
-    getUserData()
+    if(email) {
+      getUserData()
+    }
 
-  }
     if(userData) {
       history.push("/users")
     }
-  
   
   return (
     <div className="App">
@@ -72,7 +69,7 @@ function App() {
         <MessageList/>
       </Route>
       <Route path="/details/:id">
-        <MessageDetails/>
+        <MessageDetails userData={userData}/>
       </Route>
     </div>
   );

@@ -136,15 +136,17 @@ const updateUser = async (req, res) => {
 
 const findUser = async (req, res) => {
   try {
-    const user = await User.findOne(req.body);
+    const user = await User.findOne(req.body)
+    console.log(user)
+    console.log(req.body)
     if (user) {
-        return res.status(200).json(user);
+        return res.status(200).json(user)
     } else {
         return res
-            .status(404).send("User not found");
+            .status(404).send("User not found")
     }
 } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message })
 }
 }
 

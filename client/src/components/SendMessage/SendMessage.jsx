@@ -4,10 +4,14 @@ import {createMessage} from "../../service/message"
 import "./SendMessage.css"
 
 export default function SendMessage(props) {
+    console.log(props.userData)
+    console.log(props.users)
+
+    let receive = props.users.filter((item) => item !== props.userData)
     // let {id} = useParams()
-    let receiver = "6079fbc876ea7f675d84f734"
+    let receiver = receive
     // let receiver = "6079fbc876ea7f675d84f735"
-    let sender = "6079fbc876ea7f675d84f735"
+    let sender = props.userData
 
     let defaultInput = {
         content: "",
