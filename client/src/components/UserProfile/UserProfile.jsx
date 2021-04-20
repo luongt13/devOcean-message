@@ -20,7 +20,7 @@ export default function UserProfile() {
 
   return (
     <div>
-      <Link to={"/edit-profile"}>
+      <Link to={`/update-user/${id}`}>
         <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} /></div>
       </Link>
         <div>
