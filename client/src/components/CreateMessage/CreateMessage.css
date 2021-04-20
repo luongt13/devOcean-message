@@ -1,0 +1,22 @@
+.create-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.input {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+#content {
+    background-color: aquamarine;
+    width: 80%;
+    height: 50px;
+    border-radius: 15px;
+    padding: 5px;
+}

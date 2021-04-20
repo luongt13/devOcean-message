@@ -5,7 +5,7 @@ const messageRouter = require("./messages.js")
 
 const router = Router()
 
-router.use("/users", userRouter)
+router.use("/", userRouter)
 router.use("/messages", messageRouter)
 router.use("/conversations", conversationRouter)
 

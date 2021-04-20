@@ -1,5 +1,16 @@
 .send-message {
-    border: 2px solid black;
-    width: 50%;
-    height: 100px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+}
+
+#message {
+    background-color: aquamarine;
+    width: 80%;
+    height: 50px;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 10px;
 }

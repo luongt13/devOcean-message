@@ -11,11 +11,9 @@ const TOKEN_KEY = "devoceanisthegreatestappever"
 //creating a user
 const signUp = async (req, res) => {
   try {
-    const { name, email, password } = req.body
+    const { name, email, password, job, imgURL, location, languages, professionalLink, about } = req.body
     const password_digest = await bcrypt.hash(password, SALT_ROUNDS)
-
-
-    const user = new User({ name, email, password_digest, imgURL, location, languages, professionalLink, about, conversations })
+    const user = new User({ name, email, password_digest, job, imgURL, location, languages, professionalLink, about })
     // or const user= await User.create(req.body) and remove the save 
     
     await user.save()
@@ -125,7 +123,7 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    let updatedUser = await User.findByIdAndUpdate(req.params.id, rec.body, { new: true })
+    let updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
     if (updatedUser) {
       return res.status(200).json(updatedUser)
     } else {
@@ -136,4 +134,20 @@ const updateUser = async (req, res) => {
   }
 }
 
-module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser }
+const findUser = async (req, res) => {
+  try {
+    const user = await User.findOne(req.body)
+    console.log(user)
+    console.log(req.body)
+    if (user) {
+        return res.status(200).json(user)
+    } else {
+        return res
+            .status(404).send("User not found")
+    }
+} catch (error) {
+    return res.status(500).json({ error: error.message })
+}
+}
+
+module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser, findUser }

@@ -1,23 +1,28 @@
 import {useState} from 'react'
+import { useParams } from 'react-router-dom'
 import {createMessage} from "../../service/message"
 import Search from "../Search/Search.jsx"
+import "./CreateMessage.css"
 
 export default function CreateMessage(props) {
+    let {id} = useParams()
+
     const [formInput, setFormInput] = useState({
         content: "",
-        sender: "",
+        sender: id,
         receiver: "",
     })
+
 
     // function handleSearch() {
 
     // }
 
     function handleChange(event) {
-        let {name, value} = event.target
+        let {id, value} = event.target
         setFormInput((prevState) => ({
             ...prevState,
-            [name]: value
+            [id]: value
         }))
     }
 
@@ -26,13 +31,15 @@ export default function CreateMessage(props) {
         props.setToggle()
     }
     return (
-        <form onChange={handleChange} onSubmit={handleSubmit}>
-            <Search/>
+        <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
+            <div className="input">
+                <Search/>
+            </div>
             {/* <input name="receiver" value={formInput.receiver} type="text" onChange={handleSearch}  placeholder="To"/> */}
-
-            <input name="content" value={formInput.content} type="text"  placeholder="Type a message..."/>
-            <input name="sender" value={formInput.sender} placeholder="From"/>
-            <button type="submit">Send</button>
+            <div className="input">
+                    <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
+                <button type="submit">Send</button>
+            </div> 
         </form>
     )
 }

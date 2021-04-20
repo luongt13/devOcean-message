@@ -22,11 +22,13 @@ export default function MessageList() {
         <div className="message-list">
             <h1>Messages</h1>
             <button onClick={toggle}>Start A Conversation</button>
+
         {isToggled ? <CreateMessage setToggle={toggle}/> : null}
+
             {conversations ? conversations.map(item => {
                 return (
                     <div key={item._id} >
-                    <Link to={`/details/${item._id}`}><MessageItem key={item._id}  conversation={item}/></Link>
+                    <Link to={`/details/${item._id}`}><MessageItem key={item._id} conversation={item} userId={id}/></Link>
                     </div>
                 )
             }): <h1>No Conversations</h1>}

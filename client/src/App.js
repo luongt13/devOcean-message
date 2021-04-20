@@ -4,17 +4,57 @@ import UserList from "./components/UserList/UserList.jsx"
 import UserProfile from "./components/UserProfile/UserProfile.jsx"
 import MessageList from "./components/MessageList/MessageList.jsx"
 import MessageDetails from "./components/MessageDetails/MessageDetails.jsx"
+import UpdateUser from "./components/UpdateUser/UpdateUser.jsx"
 
-import {Route} from "react-router-dom"
+import { useState, useEffect } from "react"
+import { verifyUser, findUser } from "./service/user"
+import SignUp from "./components/SignUp/SignUp.jsx"
+import SignIn from "./components/SignIn/SignIn.jsx"
+import {Route, useHistory} from "react-router-dom"
+
 function App() {
-  //edit profile
-  //create message
+  const [currentUser, setCurrentUser] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [userData, setUserData] = useState(null)
+
+  let history = useHistory()
+  const logout = async () => {
+    await localStorage.clear()
+    setCurrentUser(null)
+  }
+
+  useEffect(() => {
+    requestVerification()
+  }, [])
+
+  const requestVerification = async () => {
+    const user = await verifyUser()
+    setCurrentUser(user)
+    setEmail(user.email)
+  }
+
+  async function getUserData() {
+    let res = await findUser({email: email})
+    console.log(res)
+    setUserData(res._id)
+  }
+  console.log(userData)
+    if(email) {
+      getUserData()
+    }
+
+    if(userData) {
+      history.push("/users")
+    }
   
   return (
     <div className="App">
-      <Nav/>
-      <Route>
-        {/* sign in/sign up*/}
+      <Nav currentUser={currentUser} logout={logout} userData={userData}/>
+      <Route path="/sign-in">
+        <SignIn setCurrentUser={setCurrentUser} />
+      </Route>
+      <Route path="/sign-up">
+        <SignUp setCurrentUser={setCurrentUser} />
       </Route>
       <Route exact path="/users">
         <UserList />
@@ -22,11 +62,14 @@ function App() {
       <Route path="/users/:id">
         <UserProfile />
       </Route>
-      <Route exact path="/messages/:id">
+      <Route path="/update-user/:id">
+        <UpdateUser />
+      </Route>
+      <Route path="/messages/:id">
         <MessageList/>
       </Route>
-      <Route exact path="/details/:id">
-        <MessageDetails/>
+      <Route path="/details/:id">
+        <MessageDetails userData={userData}/>
       </Route>
     </div>
   );
