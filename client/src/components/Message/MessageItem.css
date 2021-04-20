@@ -1,5 +1,6 @@
 .message-item {
-  border: 2px solid black;
+  border: 2px solid lightgray;
+  background-color: lightgray;
   margin: 0 auto;
   width: 100%;
   text-align: left;
@@ -13,4 +14,5 @@ a {
 
 .message-item:hover {
   background-color:	#4169E1;
+  border: 2px solid #4169E1;
 }

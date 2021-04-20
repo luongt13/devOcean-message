@@ -27,6 +27,7 @@ export default function MessageDetails(props) {
 //if sender is from user logged in then make it different somehow
     return (
         <div className="message-page">
+            <div className="messages">
             {messages.map(item => {
                 if (item.sender._id === props.userData) {
                     return (
@@ -43,9 +44,11 @@ export default function MessageDetails(props) {
                         </div>
                     )
                 }
-               
             })}
+        </div>
+        <div className="send-bar">
             <SendMessage users={users} setToggle={toggle} userData={props.userData}/>
+            </div>
         </div>
     )
 }
