@@ -4,6 +4,7 @@ import UserList from "./components/UserList/UserList.jsx"
 import UserProfile from "./components/UserProfile/UserProfile.jsx"
 import MessageList from "./components/MessageList/MessageList.jsx"
 import MessageDetails from "./components/MessageDetails/MessageDetails.jsx"
+import UpdateUser from "./components/UpdateUser/UpdateUser.jsx"
 
 import { useState, useEffect } from "react"
 import { verifyUser } from "./service/user"
@@ -43,7 +44,10 @@ function App() {
       <Route path="/users/:id">
         <UserProfile />
       </Route>
-      <Route path="/messages/:id">
+      <Route path="/update-user/:id">
+        <UpdateUser />
+      </Route>
+      <Route exact path="/messages/:id">
         <MessageList/>
       </Route>
       <Route path="/details/:id">

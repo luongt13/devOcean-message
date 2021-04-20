@@ -43,4 +43,8 @@ export const getUser = async (id) => {
   return user
 }
 
-//edit user
+export const updateUser = async (id) => {
+  const response = await axios.put(`${apiURL}/users/${id}`)
+  const updatedUser = response.data
+  return updatedUser
+}

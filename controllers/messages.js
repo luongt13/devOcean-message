@@ -71,17 +71,21 @@ const createMessage = async (req,res) => {
 //get thread
 const getAllMessages = async (req,res) => {
     try {
+        // let user = await Conversation.findById(req.params.id)
         let user = await Conversation.findById(req.params.id).populate({
             path: "messages",
             model: "Message",
-            populate: [{
-                path: "sender",
-                model: "User",
-            }, {
-                path: "receiver",
-                model: "User"
-            }]
-        }).populate("users")
+                // populate: {
+                // [{
+                //     path: "messages",
+                //     model: "Message"
+                // }],
+                // [{
+                //     path: "users",
+                //     model: "User"
+                // }]
+            // }
+        })
         return res.status(200).json(user)
     } catch (err) {
         return res.status(500).json({error: err.message})
