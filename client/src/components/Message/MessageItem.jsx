@@ -1,7 +1,6 @@
 import "./MessageItem.css"
 
 export default function MessageItem(props) {
-    console.log(props.conversation)
     return (
         <div className="message-item">
             {props.conversation.users.map(user => {

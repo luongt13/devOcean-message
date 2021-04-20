@@ -22,10 +22,10 @@ function App() {
       <Route path="/users/:id">
         <UserProfile />
       </Route>
-      <Route exact path="/messages/:id">
+      <Route path="/messages/:id">
         <MessageList/>
       </Route>
-      <Route exact path="/details/:id">
+      <Route path="/details/:id">
         <MessageDetails/>
       </Route>
     </div>
