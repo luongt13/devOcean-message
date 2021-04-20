@@ -1,11 +1,12 @@
 import {Link} from "react-router-dom"
+import "./Nav.css"
 
 export default function Nav(props) {
     let id = props.userData
     function displayNav() {
         if(props.currentUser) {
             return (
-                <div className="nav">
+                <div className="links">
                 <Link to="/users">Community</Link>
                 <Link to={`/messages/${id}`}>Messages</Link>
                 <Link to={`/users/${id}`}>My Profile</Link>
@@ -14,7 +15,7 @@ export default function Nav(props) {
             )
         } else {
             return (
-                <div className="nav">
+                <div className="links">
                     <Link to="/sign-in">Sign In</Link>
                     <Link to="/sign-up">Sign Up</Link>
                 </div>
@@ -22,9 +23,9 @@ export default function Nav(props) {
         }
     }
     return (
-        <>
+        <div className="nav">
         <h2>devOceans</h2>
         {displayNav()}
-        </>
+        </div>
     )
 }

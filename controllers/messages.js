@@ -95,7 +95,6 @@ const getAllMessages = async (req,res) => {
 const deleteMessage = async (req, res) => {
     try {
         let deletedMessage = await Message.findByIdAndDelete(req.params.id)
-        console.log(deletedMessage)
         let foundConversation = await Conversation.findOne({messages: {$in: [{_id: deletedMessage._id}]}})
         await foundConversation.messages.pull({_id: deletedMessage._id})
         await foundConversation.save()

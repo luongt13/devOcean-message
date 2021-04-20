@@ -4,6 +4,6 @@ const restrict = require("../helpers/restrict.js")
 
 const router = Router()
 
-router.get("/:id", restrict, getAllConversations)
+router.get("/:id", getAllConversations)
 
 module.exports = router
