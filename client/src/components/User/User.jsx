@@ -6,7 +6,7 @@ function User(props) {
         <div>
             <h2>{user.name}</h2>
             <h4>{user.email}</h4>
-            <h6>"{user.job}"</h6>
+            <h6>{user.job}</h6>
         </div>
     );
 }

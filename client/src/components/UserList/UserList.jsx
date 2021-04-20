@@ -3,26 +3,29 @@ import { getUsers } from "../../service/user"
 import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search.jsx"
 import User from "../../components/User/User.jsx"
+import {useParams} from "react-router-dom"
 
 function UserList() {
   let [users, setUsers] = useState([])
   let [filteredUsers, setFilteredUsers] = useState([]);
   let [currentUser, setCurrentUser] = useState({});
-  let [searchTerm, setSearchTerm] = useState(""); 
+  let [searchTerm, setSearchTerm] = useState("");
+  let { id } = useParams()
+
 
   useEffect(() => {
     getData()
   }, [])
 
-  useEffect(() => {
-    if (
-      filteredUsers.length === 0 &&
-      searchTerm === "" &&
-      users.length !== 0 
-    ) {
-      setFilteredUsers(users)
-    }
-  }, [filteredUsers, searchTerm, users])
+  // useEffect(() => {
+  //   if (
+  //     filteredUsers.length === 0 &&
+  //     // searchTerm === "" &&
+  //     users.length !== 0 
+  //   ) {
+  //     setFilteredUsers(users)
+  //   }
+  // }, [filteredUsers, searchTerm, users])
 
   async function getData() {
     let data = await getUsers()
@@ -37,7 +40,7 @@ function UserList() {
 
     setCurrentUser(found)
     setSearchTerm("")
-    setFilteredUsers(users)
+    // setFilteredUsers(users)
   }
 
   return (
@@ -52,9 +55,10 @@ function UserList() {
         />
         {filteredUsers.map((user) => {
           return (
-            <p onClick={handleClick} id={user.id} key={user.id}>
+            <Link to={`/users/${user._id}`}><p onClick={handleClick} id={user.id} key={user.id}>
               {user.name}
             </p>
+            </Link>
           )
         })}
       </div>
