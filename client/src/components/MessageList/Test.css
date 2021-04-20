@@ -1,7 +1,32 @@
 .test-item {
     background-color: chocolate;
+
 }
 
 .test-page {
     background-color: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: centers;
+    width: 75%;
+    height: 100vh;
+    /* overflow: scroll; */
+}
+
+.message-list {
+    display: flex;
+    flex-direction: row;
+} 
+
+.test-list {
+    width: 25%;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.test-this {
+    height: 90vh;
+    overflow: scroll;
+    width: 100%;
 }

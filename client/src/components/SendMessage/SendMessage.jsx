@@ -1,15 +1,17 @@
 import {useState} from 'react'
+import {useParams} from "react-router-dom"
 import {createMessage} from "../../service/message"
 import "./SendMessage.css"
 
 export default function SendMessage(props) {
-
-    let sender = "6079fbc876ea7f675d84f734"
+console.log(props.users)
+    let {id} = useParams()
+    // let sender = "6079fbc876ea7f675d84f734"
     let receiver = "6079fbc876ea7f675d84f735"
     
     let defaultInput = {
         content: "",
-        sender: sender,
+        sender: id,
         receiver: receiver
     }
     const [message, setMessage] = useState(defaultInput)
@@ -24,7 +26,8 @@ export default function SendMessage(props) {
     async function handleSubmit(event) {
         event.preventDefault()
         await createMessage(message)
-        props.setToggle()
+        // props.setToggle()
+        props.setReload(prevState => !prevState)
         setMessage(defaultInput)
     }
     //sender is user that is logged in...
