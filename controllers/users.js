@@ -13,8 +13,6 @@ const signUp = async (req, res) => {
   try {
     const { name, email, password } = req.body
     const password_digest = await bcrypt.hash(password, SALT_ROUNDS)
-
-
     const user = new User({ name, email, password_digest, imgURL, location, languages, professionalLink, about, conversations })
     // or const user= await User.create(req.body) and remove the save 
     
