@@ -22,6 +22,9 @@ function App() {
       <Route path="/users/:id">
         <UserProfile />
       </Route>
+      <Route path="/update-user/:id">
+        {/* <UpdateUser /> */}
+      </Route>
       <Route exact path="/messages/:id">
         <MessageList/>
       </Route>
