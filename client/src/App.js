@@ -1,5 +1,9 @@
 import './App.css'
 import Nav from "./components/Nav/Nav.jsx"
+import UserList from "./components/UserList/UserList.jsx"
+import UserProfile from "./components/UserProfile/UserProfile.jsx"
+import MessageList from "./components/MessageList/MessageList.jsx"
+import MessageDetails from "./components/MessageDetails/MessageDetails.jsx"
 
 import {Route} from "react-router-dom"
 function App() {
@@ -12,17 +16,17 @@ function App() {
       <Route>
         {/* sign in/sign up*/}
       </Route>
-      <Route>
-        {/* user list : home page*/}
+      <Route exact path="/users">
+        <UserList />
       </Route>
-      <Route>
-        {/* user profile*/}
+      <Route path="/users/:id">
+        <UserProfile />
       </Route>
-      <Route>
-        {/* message list*/}
+      <Route exact path="/messages/:id">
+        <MessageList/>
       </Route>
-      <Route>
-        {/* message thread*/}
+      <Route exact path="/details/:id">
+        <MessageDetails/>
       </Route>
     </div>
   );

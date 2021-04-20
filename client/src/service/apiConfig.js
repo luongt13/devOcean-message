@@ -5,7 +5,7 @@ const getToken = async () => {
     return `Bearer ${token}`
 }
 
-let apiURL
+let apiUrl
 
 const apiUrls = {
     production: "",
@@ -24,7 +24,7 @@ const api = axios.create( {
 
 api.interceptors.request.use(
     async (options) => {
-        options.headers("Authorization") = await getToken()
+        options.headers["Authorization"] = await getToken()
         return options
     }, 
     (error) => {
