@@ -6,7 +6,6 @@ const router = Router()
 
 router.get("/users", getUsers)
 router.post("/user", findUser)
-
 router.get("/users/:id", getUser)
 router.post("/sign-up", signUp)
 router.put("/users/:id", restrict, updateUser)
