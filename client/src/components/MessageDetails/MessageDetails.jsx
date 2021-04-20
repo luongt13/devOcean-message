@@ -5,7 +5,7 @@ import SendMessage from "../SendMessage/SendMessage.jsx"
 import "./MessageDetails.css"
 import {useToggle} from "../../hooks/useToggle"
 
-export default function MessageDetails() {
+export default function MessageDetails(props) {
     const [isToggled, toggle] = useToggle(false)
 
     const [messages, setMessages] = useState([])
@@ -33,7 +33,7 @@ console.log(messages)
                     </div>
                 )
             })}
-            <SendMessage users={users} setToggle={toggle}/>
+            <SendMessage users={users} setToggle={toggle} userData={props.userData}/>
         </div>
     )
 }
