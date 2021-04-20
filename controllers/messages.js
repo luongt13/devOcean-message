@@ -93,17 +93,23 @@ const getAllMessages = async (req,res) => {
 }
 //delete message
 const deleteMessage = async (req, res) => {
-  try {
-    let deletedMessage = await Message.findByIdAndDelete(req.params.id)
+    try {
+        let deletedMessage = await Message.findById(req.params.id)
+        console.log(deletedMessage)
+        let test = await Conversation.findOneAndUpdate({messages: {$in: [{_id: deletedMessage._id}]}}, {$pullAll: {messages: [deletedMessage._id]}})
+        console.log(test)
+    // let deletedMessage = await Message.findByIdAndDelete(req.params.id)
+    // console.log(deletedMessage)
     // if message is found by id
-    if (deletedMessage) {
-      return res.status(200).json(deletedMessage)
-    } else {
-      return res.status(404).send("Message not deleted!")
+    // await Conversation.findByIdAndUpdate({_id: deleteMessage._id}, {$pull: {messages: deletedMessage._id}})
+    // if (deletedMessage) {
+        return res.status(200).json(test)
+    // } else {
+    //     return res.status(404).send("Message not deleted!")
+    // }
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
     }
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
 }
 
 module.exports = { createMessage, getAllMessages, deleteMessage}

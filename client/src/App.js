@@ -6,16 +6,37 @@ import MessageList from "./components/MessageList/MessageList.jsx"
 import MessageDetails from "./components/MessageDetails/MessageDetails.jsx"
 import UpdateUser from "./components/UpdateUser/UpdateUser.jsx"
 
+import { useState, useEffect } from "react"
+import { verifyUser } from "./service/user"
+import SignUp from "./components/SignUp/SignUp.jsx"
+import SignIn from "./components/SignIn/SignIn.jsx"
 import {Route} from "react-router-dom"
+
 function App() {
-  //edit profile
-  //create message
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const logout = async () => {
+    await localStorage.clear()
+    setCurrentUser(null)
+  }
+
+  useEffect(() => {
+    requestVerification();
+  }, [])
+
+  const requestVerification = async () => {
+    const user = await verifyUser();
+    setCurrentUser(user);
+  }
   
   return (
     <div className="App">
-      <Nav/>
-      <Route>
-        {/* sign in/sign up*/}
+      <Nav currentUser={currentUser} logout={logout}/>
+      <Route path="/sign-in">
+        <SignIn setCurrentUser={setCurrentUser} />
+      </Route>
+      <Route path="/sign-up">
+        <SignUp setCurrentUser={setCurrentUser} />
       </Route>
       <Route exact path="/users">
         <UserList />
@@ -29,7 +50,7 @@ function App() {
       <Route exact path="/messages/:id">
         <MessageList/>
       </Route>
-      <Route exact path="/details/:id">
+      <Route path="/details/:id">
         <MessageDetails/>
       </Route>
     </div>

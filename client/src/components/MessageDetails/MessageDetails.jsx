@@ -15,7 +15,7 @@ export default function MessageDetails() {
     useEffect(() => {
         getData()
     }, [isToggled])
-
+console.log(messages)
     const getData = async () => {
         const data = await getMessages(id)
         setMessages(data.messages)
