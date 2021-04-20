@@ -16,6 +16,7 @@ export default function UpdateUser() {
 
   const history = useHistory();
   const [input, setInput] = useState(defaultInput);
+  const [updatedUser, setUpdatedUser] = useState({})
 
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -27,8 +28,8 @@ export default function UpdateUser() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let res = await updateUser(input);
-    // setUser(res)
+    let updatedUser = await updateUser(input);
+    setUpdatedUser(updatedUser)
     history.push(`/users`)
   };
 

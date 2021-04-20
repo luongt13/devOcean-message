@@ -1,22 +1,37 @@
-import {useState} from 'react'
-// import {findUser} from "../../service/message"
+import React from "react";
 
-export default function Search() {
-const [searchField, setSearchField] = useState("")
+function Search(props) {
+    // destructuring props so I dont have to call props before each item
+    let { searchTerm, setSearchTerm, setFilteredUsers, users } = props;
 
-    // function handleChange(event) {
-    //     setSearchField(event.target.value)
-    // }
 
-    // async function handleSearch() {
-    //     let res = await findUser(searchField)
-    //     console.log(res)
-    // }
+    function handleChange(event) {
 
+        setSearchTerm(event.target.value);
+        setFilteredUsers(
+            users.filter((user) =>
+                user.name
+                    .toLowerCase()
+                    .replace(/ /g, "")
+                    .includes(searchTerm.replace(/ /g, ""))
+            )
+        );
+    }
+
+    // Returning a label and input that have their value and onchange controlled by the search term
+    // state we set in SongList.jsx
     return (
-        <>
-        {/* <input placeholder="Search user..." value={searchField} onChange={handleChange}/>
-        <button onClick="handleSearch">Search</button> */}
-        </>
-    )
+        <div>
+            <label htmlFor='search'>Search</label>
+            <input
+                type='text'
+                name='search'
+                id='search'
+                value={searchTerm}
+                onChange={handleChange}
+            />
+        </div>
+    );
 }
+
+export default Search;
