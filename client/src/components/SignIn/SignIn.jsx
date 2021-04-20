@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signIn } from "../services/";
+import { signIn } from "../../service/user";
 
 export default function SignIn(props) {
   const defaultInput = {
