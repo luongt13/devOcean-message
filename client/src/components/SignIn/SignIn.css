@@ -1,0 +1,16 @@
+
+
+.SignInForm{
+  background-color:#d7d9db;
+  height: 90%;
+  width: 40%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 20px;
+  margin-bottom: 30px; 
+}

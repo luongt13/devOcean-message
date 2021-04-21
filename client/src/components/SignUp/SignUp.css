@@ -1,0 +1,63 @@
+.SignUpForm{
+  background-color:#d7d9db;
+  height: 90%;
+  width: 50%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-radius: 20px;
+  margin-bottom: 30px; 
+}
+
+.FormContainer{
+  height: 60%;
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+   align-items: center;
+}
+
+.label {
+  color: black;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 50%;
+  margin-bottom: 5px;
+  outline: none;
+}
+
+.submit {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  height: 40px;
+  border-radius: 7px;
+  /* font-weight: bold; */
+  padding: 8px 15px;
+  cursor: pointer;
+  /* background-color: #4169E1; */
+}
+
+.LongInput{
+  width: 40%;
+  margin-bottom: 15px;
+  outline: none;
+
+}
+
+.FormTitle{
+padding-top: 30px;
+font-size: 35px;
+
+}
