@@ -33,7 +33,7 @@ function App() {
     setCurrentUser(user)
     setEmail(user.email)
   }
-
+console.log(email)
   async function getUserData() {
     let res = await findUser({email: email})
     console.log(res)

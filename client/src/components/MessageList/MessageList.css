@@ -17,7 +17,8 @@
     align-items: center;
     font-weight: bold;
     text-transform: uppercase;
-    box-shadow: 0px 2px 5px 1px rgb(54, 54, 54)
+    background-color: gray;
+    /* box-shadow: 0px 2px 5px 1px rgb(54, 54, 54) */
 }
 
 .refresh:hover, .add:hover {
