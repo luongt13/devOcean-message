@@ -7,7 +7,7 @@ import CreateMessage from "../CreateMessage/CreateMessage.jsx"
 import "./MessageList.css"
 
 export default function MessageList() {
-    const [conversations, setConversations] = useState()
+    const [conversations, setConversations] = useState([])
     const [refresh, setRefresh] = useState(false)
     const [isToggled, toggle] = useToggle(false)
     let {id} = useParams()
@@ -20,6 +20,7 @@ export default function MessageList() {
         const data = await getConversations(id)
         setConversations(data.conversations)
     }
+    console.log(conversations)
     return (
         <div className="message-list">
             <div className="buttons">
@@ -29,13 +30,13 @@ export default function MessageList() {
             
             {isToggled ? <CreateMessage setToggle={toggle}/> : null}
 
-            {conversations ? conversations.map(item => {
+            {conversations.length > 1? conversations.map(item => {
                 return (
                     <div key={item._id} className="message-list">
                     <Link to={`/details/${item._id}`}><MessageItem key={item._id} conversation={item} userId={id}/></Link>
                     </div>
                 )
-            }): <h1>No Conversations</h1>}
+            }): []}
         </div>
     )
 }

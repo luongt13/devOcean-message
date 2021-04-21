@@ -1,11 +1,11 @@
 .send-message {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: center;
-   width: 100%;
-   bottom: 0;
-   position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
 }
 
 #message {
