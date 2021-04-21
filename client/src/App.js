@@ -46,7 +46,7 @@ function App() {
     if(userData) {
       history.push("/users")
     }
-  
+
   return (
     <div className="App">
       <Nav currentUser={currentUser} logout={logout} userData={userData}/>
@@ -63,7 +63,7 @@ function App() {
         <UserProfile />
       </Route>
       <Route path="/update-user/:id">
-        <UpdateUser />
+        <UpdateUser userData={userData} />
       </Route>
       <Route path="/messages/:id">
         <MessageList/>
