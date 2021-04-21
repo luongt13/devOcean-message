@@ -1,6 +1,11 @@
-h2 {
+.logo {
     margin: 0;
     padding: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    width: 10%;
 }
 
 a {
@@ -12,6 +17,7 @@ a {
 a:hover {
     color: white;
 }
+
 .nav {
     background-color:#4169E1;
     top: 0;
@@ -26,13 +32,17 @@ a:hover {
 }
 
 .links {
-    display: flex;
-    padding: 5px;
+  display: flex;
+  padding: 5px;
 }
 
 @media screen and (max-width: 650px) {
     .nav {
         flex-direction: column;
     }
-}
 
+    .logo {
+        width: 30%;
+        height: auto;
+    }
+}
