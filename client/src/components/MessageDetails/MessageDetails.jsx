@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useParams} from "react-router-dom"
-import {getMessages} from "../../service/message"
+import {deleteMessage, getMessages} from "../../service/message"
 import SendMessage from "../SendMessage/SendMessage.jsx"
 import "./MessageDetails.css"
 import {useToggle} from "../../hooks/useToggle"
@@ -21,7 +21,13 @@ export default function MessageDetails(props) {
         setMessages(data.messages)
         setUsers(data.users)
     }
-    console.log(messages)
+  console.log(messages)
+  
+  async function handleDelete(item) {
+    let message = item._id
+    deleteMessage(message)
+    getData()
+  }
 
 //sort messages>
 //if sender is from user logged in then make it different somehow
@@ -34,6 +40,8 @@ export default function MessageDetails(props) {
                         <div className="message-detail user" key={item._id}>
                         <p>{item.content}</p>
                         <h5>{item.sender.name}</h5>
+                        <button onClick={() => handleDelete(item)}>Delete Message</button>
+
                         </div>
                     )
                 } else {
