@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signUp, signIn } from "../../service/user";
+import "./SignUp.css"
 
 export default function SignUp(props) {
   const defaultInput = {
@@ -35,79 +36,92 @@ export default function SignUp(props) {
 
   return (
     <div>
-      <h3>Sign Up</h3>
-      <form onChange={handleChange} onSubmit={handleSubmit}>
-        <label>Name</label>
+      <h3 className="FormTitle">Sign Up</h3>
+      <div className="FormContainer">
+      <form className="SignUpForm" onChange={handleChange} onSubmit={handleSubmit}>
+        <label className="label">Name</label>
         <input
+          className = "input"
           name="name"
           value={input.name}
           placeholder="Enter username..."
         />
-        <label>Email</label>
+        <label className="label">Email</label>
         <input
+          className = "input"
           type="email"
           name="email"
           value={input.email}
           placeholder="Enter email..."
         />
-        <label>password</label>
+        <label className="label">Password</label>
         <input
+          className = "input"
           type="password"
           name="password"
           value={input.password}
           placeholder="Enter password..."
         />
-        <label>Password Confirmation</label>
+        <label className="label">Password Confirmation</label>
         <input
+          className = "input"
           type="password"
           name="passwordConfirmation"
           value={input.passwordConfirmation}
           placeholder="reenter password..."
         />
-        <label>Profile Image</label>
+        <label className="label">Profile Image</label>
         <input
+          className = "input"
           type="text"
           name="imgURL"
           value={input.imgURL}
           placeholder="Enter URL for image..."
         />
-        <label>Location</label>
+        <label className="label">Location</label>
         <input
+          className = "input"
           type="text"
           name="location"
           value={input.location}
           placeholder="Enter location..."
         />
-        <label>Job Title</label>
+        <label className="label">Job Title</label>
         <input
+          className = "input"
           type="text"
           name="job"
           value={input.job}
           placeholder="Enter job title..."
         />
-        <label>Languages</label>
+        <label className="label">Languages</label>
         <input
+          className = "input"
           type="text"
           name="languages"
           value={input.languages}
           placeholder="Enter languages..."
         />
-        <label>Professional Link</label>
+        <label className="label">Professional Link</label>
         <input
+          className = "input"
           type="text"
           name="professionalLink"
           value={input.professionalLink}
           placeholder="Enter professional link URL..."
         />
-        <label>About Me</label>
-        <input
-          type="textarea"
+        <label className="label">About Me</label>
+        <textarea
+        rows="3"
+          className = "input"
+          type="text"
           name="about"
           value={input.about}
           placeholder="Enter about me profile..."
         />
-        <button type="submit">Sign Up</button>
+        <button className="submit" type="submit">Sign Up</button>
       </form>
+      </div>
     </div>
   );
 }
