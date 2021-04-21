@@ -10,43 +10,49 @@ import { useState, useEffect } from "react"
 import { verifyUser, findUser } from "./service/user"
 import SignUp from "./components/SignUp/SignUp.jsx"
 import SignIn from "./components/SignIn/SignIn.jsx"
-import {Route, useHistory} from "react-router-dom"
+import {Redirect, Route, useHistory} from "react-router-dom"
 
 function App() {
+  //set current user data and user id 
   const [currentUser, setCurrentUser] = useState(null)
-  const [email, setEmail] = useState(null)
   const [userData, setUserData] = useState(null)
-
   let history = useHistory()
+  //handle logout
   const logout = async () => {
     await localStorage.clear()
     setCurrentUser(null)
+    setUserData(null)
     history.push("/sign-in")
   }
-
+  //verify user
   useEffect(() => {
     requestVerification()
   }, [])
-
+  //invoke get data (user id) when currentUser changes and if its true
+  useEffect(() => {
+    if(currentUser) {
+      getUserData()
+    }
+  }, [currentUser])
+  //verify user and set to current user
   const requestVerification = async () => {
     const user = await verifyUser()
     setCurrentUser(user)
-    setEmail(user.email)
   }
-console.log(email)
+  //get user id of user that is logged in based on their email
   async function getUserData() {
-    let res = await findUser({email: email})
-    console.log(res)
+    let res = await findUser({email: currentUser.email})
     setUserData(res._id)
   }
-    if(email) {
-      getUserData()
-    }
 
-    if(userData) {
-      history.push("/users")
+  const renderEdit = () => {
+    if(currentUser) {
+      return <UpdateUser userData={userData}/>
+    } else {
+      return <Redirect to="/sign-in"/>
     }
-
+  }
+  
   return (
     <div className="App">
       <Nav currentUser={currentUser} logout={logout} userData={userData}/>
@@ -60,10 +66,11 @@ console.log(email)
         <UserList />
       </Route>
       <Route path="/users/:id">
-        <UserProfile />
+        <UserProfile userData={userData}/>
       </Route>
       <Route path="/update-user/:id">
-        <UpdateUser userData={userData} />
+        {/* <UpdateUser /> */}
+        {renderEdit()}
       </Route>
       <Route path="/messages/:id">
         <MessageList/>
@@ -75,4 +82,4 @@ console.log(email)
   )
 }
 
-export default App;
+export default App

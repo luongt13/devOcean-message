@@ -1,10 +1,11 @@
 import {useState} from 'react'
-import {useParams} from "react-router-dom"
 import {createMessage} from "../../service/message"
 import "./SendMessage.css"
 
 export default function SendMessage(props) {
+    //to be used to store receiver information
     let receive =[]
+    //if there are users then find out who is not the user logged in
     if(props.users) {
         props.users.forEach((item) => {
             if(item._id !== props.userData) {
@@ -21,7 +22,7 @@ export default function SendMessage(props) {
         receiver: receiver,
     }
     const [message, setMessage] = useState(defaultInput)
-
+    //when user types message, update the receiver and message content
     function handleChange(event) {
         setMessage((prevState) => ({
             ...prevState,
@@ -29,7 +30,7 @@ export default function SendMessage(props) {
             content: event.target.value
         }))
     }
-
+    //when submit, create message 
     async function handleSubmit(event) {
         event.preventDefault()
         await createMessage(message)
