@@ -17,7 +17,6 @@ function UserList() {
 
   async function getData() {
     let data = await getUsers()
-    console.log(data)
     setUsers(data)
   }
 
