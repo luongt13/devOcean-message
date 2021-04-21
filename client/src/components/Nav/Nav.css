@@ -16,16 +16,22 @@ a:hover {
     background-color:#4169E1;
     top: 0;
     padding: 5px;
+    position: fixed;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
-    margin-bottom: 20px;
 }
 
 .links {
     display: flex;
     padding: 5px;
+}
+
+@media screen and (max-width: 650px) {
+    .nav {
+        flex-direction: column;
+    }
 }
 
