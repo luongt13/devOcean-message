@@ -22,6 +22,7 @@ const createMessage = async (req,res) => {
         let foundReceiver = await User.findById(receiver)
         //// an array and it has to match for sender AND receiver 
         let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}})
+        console.log(foundConversation)
         if (foundConversation.length === 0) {
               //if conversation is not found then create conversation
             let newConversation = await Conversation.create({users: [foundSender, foundReceiver], message: []})
@@ -48,7 +49,7 @@ const createMessage = async (req,res) => {
                 {$push: {messages: msg._id}},
                 {new: true}
             )
-            return res.status(201).json(msg)
+            return res.status(201).json(foundConversation)
         }
     } catch (err) {
         return res.status(500).json({error: err.message})

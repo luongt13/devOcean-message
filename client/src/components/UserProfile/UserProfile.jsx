@@ -1,13 +1,14 @@
 
 import { useEffect, useState } from "react"
 import { getUser } from "../../service/user.js"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import { Link } from "react-router-dom"
-import CreateMessage from "../CreateMessage/CreateMessage.jsx"
+import {createMessage} from "../../service/message"
 
 export default function UserProfile(props) {
   let [user, setUser] = useState({})
   let { id } = useParams()
+  let history = useHistory()
   let userLogged = props.userData
   useEffect(() => {
     getUserData();
@@ -15,12 +16,16 @@ export default function UserProfile(props) {
   
   async function getUserData() {
     let data = await getUser(id)
-    // console.log(data)
     setUser(data)
   }
 
-  function handleClick() {
-      <CreateMessage sendTo={id}/>
+  async function handleClick(){
+    let body = {
+      sender: userLogged,
+      receiver: id,
+    }
+    let created = await createMessage(body)
+    history.push(`/details/${created[0]._id}`)
   }
 
   const renderEditButton = () => {
@@ -35,11 +40,12 @@ export default function UserProfile(props) {
         // <button onClick={handleClick}>Message</button>
         // <CreateMessage/>
         // <Link to={`/messages/${userLogged}`} onClick={handleClick}>
-        <Link to={`/messages/${userLogged}`} onClick={handleClick}>
-           <CreateMessage sendTo={id}/>
-        <img src="http://cdn.onlinewebfonts.com/svg/img_125115.png" height={40} width={40} alt={"message icon"} />
+        // <Link to={`/messages/${userLogged}`} onClick={handleClick}>
+        <>
+        <img onClick={handleClick} src="http://cdn.onlinewebfonts.com/svg/img_125115.png" height={40} width={40} alt={"message icon"} />
         <h4>Message Me!</h4>
-        </Link>
+        {/* </Link> */}
+        </>
       )
     }
   }
