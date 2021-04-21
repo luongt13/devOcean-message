@@ -15,7 +15,7 @@ export default function MessageList() {
     useEffect(() => {
         getUserCon()
     }, [refresh, isToggled])
-
+    
     const getUserCon = async () => {
         const data = await getConversations(id)
         setConversations(data.conversations)
