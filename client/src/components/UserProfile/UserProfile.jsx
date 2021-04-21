@@ -4,10 +4,10 @@ import { getUser } from "../../service/user.js"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 
-export default function UserProfile() {
+export default function UserProfile(props) {
   let [user, setUser] = useState({})
   let { id } = useParams()
-
+  let userLogged = props.userData
   useEffect(() => {
     getUserData();
   }, []);
@@ -18,11 +18,21 @@ export default function UserProfile() {
     setUser(data)
   }
 
-  return (
+  const renderEditButton = () => {
+    if(userLogged === id) {
+      return (
+        <Link to={`/update-user/${id}`}>
+          <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} alt={"edit profile icon"} /></div>
+        </Link>
+      )
+    }
+  }
+    return (
     <div>
-      <Link to={`/update-user/${id}`}>
+      {renderEditButton()}
+      {/* <Link to={`/update-user/${id}`}>
         <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} alt={"edit profile icon"} /></div>
-      </Link>
+      </Link> */}
         <div>
         <img src={user.imgURL} height={350} width={350} alt="profile pic" />
         <h1>{user.name}</h1>

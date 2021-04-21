@@ -71,7 +71,7 @@ console.log(currentUser)
         <UserList />
       </Route>
       <Route path="/users/:id">
-        <UserProfile />
+        <UserProfile userData={userData}/>
       </Route>
       <Route path="/update-user/:id">
         {/* <UpdateUser /> */}
