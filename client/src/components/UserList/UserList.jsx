@@ -57,7 +57,7 @@ function UserList() {
         <User currentUser={currentUser} />
       </div>
 
-      <div>
+      <div className="container-div">
         {users.map((user) => {
           return (
             <div className="user-container" key={user._id}>

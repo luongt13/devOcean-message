@@ -5,13 +5,19 @@
   justify-content: center;
 }
 
+.container-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .user-container {
   display: flex;
   flex-direction: row;
-  max-width: 100%;
+  width: 60%;
   justify-content: space-around;
   border: 2px black solid;
-  margin: 25px 300px 25px 300px;
+  margin: 20px 0px 20px 0px;
   background-color: lightgray;
   align-items: center;
 }
@@ -22,9 +28,7 @@
 }
 
 .user-container a:hover {
-  color: #318fe6;
-  font-style: italic;
-  text-decoration: underline;
+  color: #ffffff;
 }
 
 .user-container p {
@@ -36,4 +40,22 @@
 .profile-pic {
   width: 150px;
   border-radius: 50%;
+}
+
+@media only screen and (max-width: 500px) {
+  body,
+  .user-container {
+    display: block;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 340px;
+    font-size: 25px;
+  }
+
+  .profile-pic {
+    width: 50%;
+    border-radius: 50%;
+    margin-top: 25px;
+  }
 }
