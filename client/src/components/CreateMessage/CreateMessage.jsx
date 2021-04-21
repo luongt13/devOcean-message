@@ -9,7 +9,6 @@ export default function CreateMessage(props) {
     let [users, setUsers] = useState([])
     let [filteredUsers, setFilteredUsers] = useState([]);
     let [searchTerm, setSearchTerm] = useState("");
-    let [name, setName] = useState("")
     let { id } = useParams()
 
     const [formInput, setFormInput] = useState({
@@ -17,7 +16,7 @@ export default function CreateMessage(props) {
         sender: id,
         receiver: "",
     })
-
+    //get users for search feature
     useEffect(() => {
         getData()
     }, [])
@@ -26,17 +25,16 @@ export default function CreateMessage(props) {
         let data = await getUsers()
         setUsers(data)
     }
-
+    //when user clicks the user, it sets search box to name chosen
     function handleClick(e) {
         let {id, name} = e.target
-        setName(name)
         setFormInput((prevState) => ({
             ...prevState,
             receiver: id
         }))
-        setSearchTerm("")
+        setSearchTerm(name)
     }
-
+    //set form data on change of message box
     function handleChange(event) {
         let {id, value} = event.target
         setFormInput((prevState) => ({
@@ -44,7 +42,7 @@ export default function CreateMessage(props) {
             [id]: value
         }))
     }
-
+    //create message
     async function handleSubmit(event) {
         event.preventDefault()
         await createMessage(formInput)
@@ -72,7 +70,6 @@ export default function CreateMessage(props) {
                 </div>
             </div>
             <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
-                <input value={name}/>
                 <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
                 <button type="submit">Send</button>
             </form>
