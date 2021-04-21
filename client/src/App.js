@@ -46,7 +46,7 @@ console.log(email)
     if(userData) {
       history.push("/users")
     }
-  
+
   return (
     <div className="App">
       <Nav currentUser={currentUser} logout={logout} userData={userData}/>
@@ -63,7 +63,7 @@ console.log(email)
         <UserProfile />
       </Route>
       <Route path="/update-user/:id">
-        <UpdateUser />
+        <UpdateUser userData={userData} />
       </Route>
       <Route path="/messages/:id">
         <MessageList/>

@@ -3,29 +3,17 @@ import { getUsers } from "../../service/user"
 import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search.jsx"
 import User from "../../components/User/User.jsx"
-import {useParams} from "react-router-dom"
 
 function UserList() {
   let [users, setUsers] = useState([])
   let [filteredUsers, setFilteredUsers] = useState([]);
   let [currentUser, setCurrentUser] = useState({});
   let [searchTerm, setSearchTerm] = useState("");
-  let { id } = useParams()
 
 
   useEffect(() => {
     getData()
   }, [])
-
-  // useEffect(() => {
-  //   if (
-  //     filteredUsers.length === 0 &&
-  //     // searchTerm === "" &&
-  //     users.length !== 0 
-  //   ) {
-  //     setFilteredUsers(users)
-  //   }
-  // }, [filteredUsers, searchTerm, users])
 
   async function getData() {
     let data = await getUsers()
@@ -40,7 +28,6 @@ function UserList() {
 
     setCurrentUser(found)
     setSearchTerm("")
-    // setFilteredUsers(users)
   }
 
   return (
@@ -53,9 +40,10 @@ function UserList() {
           users={users}
           setFilteredUsers={setFilteredUsers}
         />
-        {filteredUsers.map((user) => {
+        {searchTerm.length > 1 && filteredUsers.map((user) => {
           return (
             <Link to={`/users/${user._id}`}><p onClick={handleClick} id={user.id} key={user.id}>
+              <img src={user.imgURL} height={30} width={30} alt="mini profile pic" />
               {user.name}
             </p>
             </Link>
