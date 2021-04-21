@@ -3,6 +3,7 @@ import { getUsers } from "../../service/user"
 import { Link } from "react-router-dom";
 import Search from "../../components/Search/Search.jsx"
 import User from "../../components/User/User.jsx"
+import "./UserList.css"
 
 function UserList() {
   let [users, setUsers] = useState([])
@@ -39,6 +40,8 @@ function UserList() {
           users={users}
           setFilteredUsers={setFilteredUsers}
         />
+        </div>
+      <div className="search-results">
         {searchTerm.length > 1 && filteredUsers.map((user) => {
           return (
             <Link to={`/users/${user._id}`}><p onClick={handleClick} id={user.id} key={user.id}>
@@ -59,10 +62,12 @@ function UserList() {
           return (
             <div className="user-container" key={user._id}>
               <Link to={`/users/${user._id}`} key={user._id}>
-                <img src={user.imgURL} height={150} width={150} alt="profile pic" />
-                <h3>{user.name}</h3>
+                <img className="profile-pic" src={user.imgURL} height={150} width={150} alt="profile pic" />
               </Link>
-                <p>{user.job}</p>
+              <Link to={`/users/${user._id}`} key={user._id}>
+                <h3 className="user-name">{user.name}</h3>
+              </Link>
+              <p>{user.job}</p>              
             </div>
           )
         })}

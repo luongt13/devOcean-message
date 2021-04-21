@@ -1,12 +1,12 @@
 .search-input {
-    text-transform: uppercase;
-    font-weight: bold;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 #search {
-    background-color: darkgray;
-    border: none;
-    border-radius: 15px;
-    padding: 10px 20px;
-    margin: 5px;
+  background-color: lightgray;
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 5px;
+  width: 700px;
 }

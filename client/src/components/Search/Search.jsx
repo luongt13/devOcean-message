@@ -5,9 +5,7 @@ function Search(props) {
     // destructuring props so I dont have to call props before each item
     let { searchTerm, setSearchTerm, setFilteredUsers, users } = props;
 
-
     function handleChange(event) {
-
         setSearchTerm(event.target.value);
         setFilteredUsers(
             users.filter((user) =>
@@ -18,17 +16,17 @@ function Search(props) {
             )
         );
     }
-
     // Returning a label and input that have their value and onchange controlled by the search term
     // state we set in SongList.jsx
     return (
         <div className="search-input">
-            <label htmlFor='search'>Search</label>
+            {/* <label htmlFor='search'>Search</label> */}
             <input
                 type='text'
                 name='search'
                 id='search'
                 autocomplete="off"
+                placeholder='Search user here...'
                 value={searchTerm}
                 onChange={handleChange}
             />

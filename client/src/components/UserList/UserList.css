@@ -1,0 +1,39 @@
+.search-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  justify-content: space-around;
+  border: 2px black solid;
+  margin: 25px 300px 25px 300px;
+  background-color: lightgray;
+  align-items: center;
+}
+
+.user-container a {
+  width: 100px;
+  color: #000000;
+}
+
+.user-container a:hover {
+  color: #318fe6;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.user-container p {
+  width: 100px;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.profile-pic {
+  width: 150px;
+  border-radius: 50%;
+}
