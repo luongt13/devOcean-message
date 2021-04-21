@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom"
 import "./Nav.css"
 
+
 export default function Nav(props) {
     let id = props.userData
     function displayNav() {
