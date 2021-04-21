@@ -5,7 +5,6 @@ import "./SignIn.css"
 
 export default function SignIn(props) {
   const defaultInput = {
-    name: "",
     email: "",
     password: "",
   };
@@ -33,14 +32,7 @@ export default function SignIn(props) {
       <h3 className="form-title">Sign In</h3>
       <div className="form-container">
       <form className="sign-in-form"onChange={handleChange} onSubmit={handleSubmit}>
-      <label className="label">Name</label>
-        <input
-          className = "input"
-          type="name"
-          name="name"
-          value={input.name}
-          placeholder="Enter name..."
-        />
+      {/* <label className="label">Name</label> */}
         <label className="label">Email</label>
         <input
           className = "input"

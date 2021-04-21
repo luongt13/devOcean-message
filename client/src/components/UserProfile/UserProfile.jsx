@@ -10,16 +10,16 @@ export default function UserProfile(props) {
   let userLogged = props.userData
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [id]);
   
   async function getUserData() {
     let data = await getUser(id)
-    console.log(data)
+    // console.log(data)
     setUser(data)
   }
 
   const renderEditButton = () => {
-    if(userLogged === id) {
+    if (userLogged === id) {
       return (
         <Link to={`/update-user/${id}`}>
           <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} alt={"edit profile icon"} /></div>
@@ -29,7 +29,7 @@ export default function UserProfile(props) {
   }
     return (
     <div>
-      {renderEditButton()}
+        {renderEditButton()}
       {/* <Link to={`/update-user/${id}`}>
         <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} alt={"edit profile icon"} /></div>
       </Link> */}
