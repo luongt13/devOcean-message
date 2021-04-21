@@ -10,17 +10,19 @@ import { useState, useEffect } from "react"
 import { verifyUser, findUser } from "./service/user"
 import SignUp from "./components/SignUp/SignUp.jsx"
 import SignIn from "./components/SignIn/SignIn.jsx"
-import {Route, useHistory} from "react-router-dom"
+import {Redirect, Route, useHistory} from "react-router-dom"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [email, setEmail] = useState(null)
   const [userData, setUserData] = useState(null)
-
   let history = useHistory()
+
   const logout = async () => {
     await localStorage.clear()
     setCurrentUser(null)
+    setUserData(null)
+    setEmail(null)
     history.push("/sign-in")
   }
 
@@ -28,23 +30,32 @@ function App() {
     requestVerification()
   }, [])
 
+  useEffect(() => {
+    if(email && currentUser) {
+      getUserData()
+    }
+  }, [currentUser, email])
+
   const requestVerification = async () => {
     const user = await verifyUser()
     setCurrentUser(user)
     setEmail(user.email)
   }
-console.log(email)
   async function getUserData() {
     let res = await findUser({email: email})
-    console.log(res)
     setUserData(res._id)
   }
-    if(email) {
-      getUserData()
-    }
-
-    if(userData) {
-      history.push("/users")
+    // if(email) {
+    //   getUserData()
+    // }
+    console.log(email)
+console.log(currentUser)
+    const renderEdit = () => {
+      if(currentUser) {
+        return <UpdateUser userData={userData}/>
+      } else {
+        return <Redirect to="/sign-in"/>
+      }
     }
 
   return (
@@ -60,10 +71,11 @@ console.log(email)
         <UserList />
       </Route>
       <Route path="/users/:id">
-        <UserProfile />
+        <UserProfile userData={userData}/>
       </Route>
       <Route path="/update-user/:id">
-        <UpdateUser userData={userData} />
+        {/* <UpdateUser /> */}
+        {renderEdit()}
       </Route>
       <Route path="/messages/:id">
         <MessageList/>

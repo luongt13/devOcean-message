@@ -9,6 +9,7 @@ export default function CreateMessage(props) {
     let [users, setUsers] = useState([])
     let [filteredUsers, setFilteredUsers] = useState([]);
     let [searchTerm, setSearchTerm] = useState("");
+    let [name, setName] = useState("")
     let { id } = useParams()
 
     const [formInput, setFormInput] = useState({
@@ -17,23 +18,21 @@ export default function CreateMessage(props) {
         receiver: "",
     })
 
-
     useEffect(() => {
         getData()
     }, [])
 
     async function getData() {
         let data = await getUsers()
-        console.log(data)
         setUsers(data)
     }
 
     function handleClick(e) {
-        console.log(e.target.id)
-        let receiverId = e.target.id
+        let {id, name} = e.target
+        setName(name)
         setFormInput((prevState) => ({
             ...prevState,
-            receiver: receiverId
+            receiver: id
         }))
         setSearchTerm("")
     }
@@ -51,6 +50,7 @@ export default function CreateMessage(props) {
         await createMessage(formInput)
         props.setToggle()
     }
+
     return (
         <div>
             <div className="search-bar">
@@ -61,19 +61,21 @@ export default function CreateMessage(props) {
                     users={users}
                     setFilteredUsers={setFilteredUsers}
                 />
-                {filteredUsers.map((user) => {
-                    return (
-                    <p onClick={handleClick} id={user._id} key={user.id}>
-                    {user.name}
-                    </p>
-            )
-        })}
-        </div>
-
-        <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
-             <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
-            <button type="submit">Send</button>
-        </form>
+                <div className="search-results">
+                    {searchTerm.length > 1 && filteredUsers.map((user) => {
+                        return (
+                        <button onClick={handleClick} id={user._id} name={user.name} key={user.id}>
+                        {user.name}
+                        </button>
+                        )
+                    })}
+                </div>
+            </div>
+            <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
+                <input value={name}/>
+                <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
+                <button type="submit">Send</button>
+            </form>
         </div>
     )
 }

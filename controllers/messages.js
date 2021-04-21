@@ -54,25 +54,9 @@ const createMessage = async (req,res) => {
         return res.status(500).json({error: err.message})
     }
 }
-//get messages for specific sender and receiver 
-// const getAllMessages = async (req,res) => {
-//     try {
-//         let {receiver, sender} = req.body
-//         let foundReceiver = await User.findById(receiver)
-//         let foundSender = await User.findById(sender)
-//         //find convo - where messages are stored 
-//         let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}}).populate("messages")
-//         //return conversation...message
-//         return res.status(200).json(foundConversation)
-//     } catch (err) {
-//         return res.status(500).json({error: err.message})
-//     }
-// }
-
 //get thread
 const getAllMessages = async (req,res) => {
     try {
-        // let user = await Conversation.findById(req.params.id)
         let user = await Conversation.findById(req.params.id).populate({
             path: "messages",
             model: "Message",
