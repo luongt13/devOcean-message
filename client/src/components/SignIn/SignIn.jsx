@@ -49,7 +49,7 @@ export default function SignIn(props) {
           value={input.email}
           placeholder="Enter email..."
         />
-        <label className="label">password</label>
+        <label className="label">Password</label>
         <input
           className = "input"
           type="password"
