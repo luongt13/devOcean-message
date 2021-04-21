@@ -6,7 +6,6 @@ import "./MessageDetails.css"
 import {useToggle} from "../../hooks/useToggle"
 
 export default function MessageDetails(props) {
-    console.log(props.userData)
     const [isToggled, toggle] = useToggle(false)
     const [messages, setMessages] = useState([])
     const [users, setUsers] = useState()

@@ -6,7 +6,6 @@ import Search from "../Search/Search.jsx"
 import "./CreateMessage.css"
 
 export default function CreateMessage(props) {
-    console.log(props)
     let [users, setUsers] = useState([])
     let [filteredUsers, setFilteredUsers] = useState([]);
     let [searchTerm, setSearchTerm] = useState("");

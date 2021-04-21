@@ -3,7 +3,6 @@ import {createMessage} from "../../service/message"
 import "./SendMessage.css"
 
 export default function SendMessage(props) {
-    console.log(props.users)
     //to be used to store receiver information
     let receive =[]
     //if there are users then find out who is not the user logged in
