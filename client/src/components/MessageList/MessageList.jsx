@@ -8,12 +8,12 @@ import "./MessageList.css"
 export default function MessageList() {
     const [conversations, setConversations] = useState()
     const [refresh, setRefresh] = useState(false)
-    const [isToggled, toggle] = useToggle()
+    const [isToggled, toggle] = useToggle(false)
     let {id} = useParams()
 
     useEffect(() => {
         getUserCon()
-    }, [refresh])
+    }, [refresh, isToggled])
 
     const getUserCon = async () => {
         const data = await getConversations(id)
