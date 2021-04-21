@@ -22,10 +22,9 @@ export default function MessageList() {
     // sort the array by date????
     return (
         <div className="message-list">
-            <h1>Messages</h1>
             <div className="buttons">
-                <button onClick={() => setRefresh((prevState) => !prevState)}>Refresh</button>
-                <button onClick={toggle}>Start A Conversation</button>
+                <button className="add" onClick={toggle} title="start a conversation"><img src="https://cdn.iconscout.com/icon/free/png-512/add-new-1439785-1214356.png"/>Start A Conversation</button>
+                <button title="refresh" className="refresh"onClick={() => setRefresh((prevState) => !prevState)}><img src="https://image.flaticon.com/icons/png/512/61/61444.png"/>Refresh</button>
             </div>
             
             {isToggled ? <CreateMessage setToggle={toggle}/> : null}
