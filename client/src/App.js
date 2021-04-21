@@ -30,6 +30,12 @@ function App() {
     requestVerification()
   }, [])
 
+  useEffect(() => {
+    if(email && currentUser) {
+      getUserData()
+    }
+  }, [currentUser, email])
+
   const requestVerification = async () => {
     const user = await verifyUser()
     setCurrentUser(user)
@@ -39,10 +45,11 @@ function App() {
     let res = await findUser({email: email})
     setUserData(res._id)
   }
-    if(email) {
-      getUserData()
-    }
-
+    // if(email) {
+    //   getUserData()
+    // }
+    console.log(email)
+console.log(currentUser)
     const renderEdit = () => {
       if(currentUser) {
         return <UpdateUser userData={userData}/>
