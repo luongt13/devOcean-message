@@ -30,9 +30,9 @@ export default function SignIn(props) {
 
   return (
     <div>
-      <h3 className="FormTitle">Sign In</h3>
-      <div className="FormContainer">
-      <form className="SignInForm"onChange={handleChange} onSubmit={handleSubmit}>
+      <h3 className="form-title">Sign In</h3>
+      <div className="form-container">
+      <form className="sign-in-form"onChange={handleChange} onSubmit={handleSubmit}>
       <label className="label">Name</label>
         <input
           className = "input"
