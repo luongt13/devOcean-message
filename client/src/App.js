@@ -63,7 +63,7 @@ function App() {
         <SignUp setCurrentUser={setCurrentUser} />
       </Route>
       <Route exact path="/users">
-        <UserList />
+        <UserList userData={userData}/>
       </Route>
       <Route path="/users/:id">
         <UserProfile userData={userData}/>
