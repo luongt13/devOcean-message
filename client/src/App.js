@@ -47,12 +47,12 @@ console.log(email)
 
     const renderEdit = () => {
       if(currentUser) {
-        return <UpdateUser/>
+        return <UpdateUser userData={userData}/>
       } else {
         return <Redirect to="/sign-in"/>
       }
     }
-  
+
   return (
     <div className="App">
       <Nav currentUser={currentUser} logout={logout} userData={userData}/>
