@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { getUser } from "../../service/user.js"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
+import CreateMessage from "../CreateMessage/CreateMessage.jsx"
 
 export default function UserProfile(props) {
   let [user, setUser] = useState({})
@@ -18,6 +19,10 @@ export default function UserProfile(props) {
     setUser(data)
   }
 
+  function handleClick() {
+      <CreateMessage sendTo={id}/>
+  }
+
   const renderEditButton = () => {
     if (userLogged === id) {
       return (
@@ -25,11 +30,21 @@ export default function UserProfile(props) {
           <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} alt={"edit profile icon"} /></div>
         </Link>
       )
+    } else {
+      return (
+        // <button onClick={handleClick}>Message</button>
+        // <CreateMessage/>
+        // <Link to={`/messages/${userLogged}`} onClick={handleClick}>
+        <Link to={`/messages/${userLogged}`} onClick={handleClick}>
+           <CreateMessage sendTo={id}/>
+        <img src="http://cdn.onlinewebfonts.com/svg/img_125115.png" height={40} width={40} alt={"message icon"} />
+        <h4>Message Me!</h4>
+        </Link>
+      )
     }
   }
     return (
     <div>
-        {renderEditButton()}
       {/* <Link to={`/update-user/${id}`}>
         <div className="edit-profile"><img src="https://cdn0.iconfinder.com/data/icons/glyphpack/45/edit-alt-512.png" height={30} width={30} alt={"edit profile icon"} /></div>
       </Link> */}
@@ -47,10 +62,11 @@ export default function UserProfile(props) {
       
       <p><strong>About Me:</strong> {user.about}</p>
       
-      <Link to={`/messages/${id}`}>
+      {/* <Link to={`/messages/${userLogged}`}>
         <img src="http://cdn.onlinewebfonts.com/svg/img_125115.png" height={40} width={40} alt={"message icon"} />
         <h4>Message Me!</h4>
-        </Link>
+        </Link> */}
+      {renderEditButton()}
     </div>
   )
 }

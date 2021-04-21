@@ -37,9 +37,9 @@ export default function SignUp(props) {
 
   return (
     <div>
-      <h3 className="FormTitle">Sign Up</h3>
-      <div className="FormContainer">
-      <form className="SignUpForm" onChange={handleChange} onSubmit={handleSubmit}>
+      <h3 className="form-title">Sign Up</h3>
+      <div className="form-container">
+      <form className="sign-up-form" onChange={handleChange} onSubmit={handleSubmit}>
         <label className="label">Name</label>
         <input
           className = "input"
