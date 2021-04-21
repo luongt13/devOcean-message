@@ -28,10 +28,11 @@ export default function CreateMessage(props) {
     }
 
     function handleClick(e) {
-        let receiverId = e.target.id
+        let {id, name} = e.target
+        setName(name)
         setFormInput((prevState) => ({
             ...prevState,
-            receiver: receiverId
+            receiver: id
         }))
         setSearchTerm("")
     }
@@ -49,7 +50,7 @@ export default function CreateMessage(props) {
         await createMessage(formInput)
         props.setToggle()
     }
-    console.log(name)
+
     return (
         <div>
             <div className="search-bar">
@@ -61,21 +62,20 @@ export default function CreateMessage(props) {
                     setFilteredUsers={setFilteredUsers}
                 />
                 <div className="search-results">
-                {searchTerm.length > 1 && filteredUsers.map((user) => {
-                    return (
-                    <p onClick={handleClick} onClick={() => setName(user.name)}id={user._id} key={user.id}>
-                    {user.name}
-                    </p>
-            )
-        })}
-         </div>
-        </div>
-
-        <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
-            <input value={name}/>
-            <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
-            <button type="submit">Send</button>
-        </form>
+                    {searchTerm.length > 1 && filteredUsers.map((user) => {
+                        return (
+                        <button onClick={handleClick} id={user._id} name={user.name} key={user.id}>
+                        {user.name}
+                        </button>
+                        )
+                    })}
+                </div>
+            </div>
+            <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
+                <input value={name}/>
+                <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
+                <button type="submit">Send</button>
+            </form>
         </div>
     )
 }
