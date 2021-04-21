@@ -120,7 +120,7 @@ export default function SignUp(props) {
           value={input.about}
           placeholder="Enter about me profile..."
         />
-        <button className="submit" type="submit">Sign Up</button>
+        <button className="submit" type="submit">Create Account</button>
       </form>
       </div>
     </div>
