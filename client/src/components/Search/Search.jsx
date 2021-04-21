@@ -23,12 +23,13 @@ function Search(props) {
     // state we set in SongList.jsx
     return (
         <div className="search-input">
-            <label htmlFor='search'>Search</label>
+            {/* <label htmlFor='search'>Search</label> */}
             <input
                 type='text'
                 name='search'
                 id='search'
                 autocomplete="off"
+                placeholder='Search user here...'
                 value={searchTerm}
                 onChange={handleChange}
             />
