@@ -113,7 +113,7 @@ export default function SignUp(props) {
         />
         <label className="label">About Me</label>
         <textarea
-        rows="3"
+          rows="3"
           className = "input"
           type="text"
           name="about"
