@@ -40,7 +40,7 @@ const createMessage = async (req,res) => {
                 {_id: newConversation._id},
                 {$push: {messages: msg._id}}
                 )
-            return res.status(201).json(msg)
+            return res.status(201).json(newConversation)
         } else {
             //push new message into conversation messages
             let msg = await Message.create(newMessage)
