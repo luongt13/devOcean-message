@@ -16,9 +16,9 @@
 }
 
 .sign-up-form {
-  background-color: lightgray;
+  background-color: #c9dae8;
   height: 90%;
-  width: 40%;
+  width: 50%;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,6 @@
   justify-content: center;
   align-content: center;
   align-items: center;
-  /* border-radius: 20px; */
   margin-bottom: 30px;
 }
 
@@ -38,7 +37,7 @@
 }
 
 .input {
-  width: 50%;
+  width: 60%;
   margin-bottom: 5px;
   outline: none;
   height: 20px;
