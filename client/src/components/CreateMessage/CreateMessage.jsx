@@ -61,7 +61,7 @@ export default function CreateMessage(props) {
                     setFilteredUsers={setFilteredUsers}
                 />
                 <div className="search-results">
-                {filteredUsers.map((user) => {
+                {searchTerm.length > 1 && filteredUsers.map((user) => {
                     return (
                     <p onClick={handleClick} onClick={() => setName(user.name)}id={user._id} key={user.id}>
                     {user.name}
