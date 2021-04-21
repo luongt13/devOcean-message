@@ -10,45 +10,56 @@ export default function MessageDetails(props) {
     const [isToggled, toggle] = useToggle(false)
     const [messages, setMessages] = useState([])
     const [users, setUsers] = useState()
+    const [displayName, setDisplayName] = useState("")
     let {id} = useParams()
+    let receiveName = []
 
     useEffect(() => {
         getData()
     }, [isToggled])
+    useEffect(() => {
+        setDisplayName(receiveName.toString())
+    }, [receiveName])
 
     const getData = async () => {
         const data = await getMessages(id)
         setMessages(data.messages)
         setUsers(data.users)
     }
-  console.log(messages)
-  
-  async function handleDelete(item) {
-    let message = item._id
-    deleteMessage(message)
-    getData()
-  }
 
+    if(users) {
+        users.forEach((item) => {
+            if(item._id !== props.userData) {
+                receiveName.push(item.name)
+            }
+        })
+    }
+
+    async function handleDelete(item) {
+        let message = item._id
+        deleteMessage(message)
+        getData()
+    }
 //sort messages>
 //if sender is from user logged in then make it different somehow
     return (
         <div className="message-page">
+            <h3>{displayName}</h3>
             <div className="messages">
             {messages.map(item => {
                 if (item.sender._id === props.userData) {
                     return (
                         <div className="message-detail user" key={item._id}>
-                        <p>{item.content}</p>
-                        <h5>{item.sender.name}</h5>
-                        <button onClick={() => handleDelete(item)}>Delete Message</button>
-
+                            <button className="delete-button" onClick={() => handleDelete(item)} title="delete message"> X Delete</button>
+                            <p className="body-text">{item.content}</p>
+                            <h6>{item.sender.name}</h6>
                         </div>
                     )
                 } else {
                     return (
                         <div className="message-detail other-user" key={item._id}>
-                        <p>{item.content}</p>
-                        <h5>{item.sender.name}</h5>
+                        <p className="body-text">{item.content}</p>
+                        <h6>{item.sender.name}</h6>
                         </div>
                     )
                 }
