@@ -42,8 +42,7 @@
   border-radius: 50%;
 }
 
-@media only screen and (max-width: 500px) {
-  body,
+@media only screen and (max-width: 700px) {
   .user-container {
     display: block;
     text-align: center;
@@ -51,6 +50,12 @@
     width: 100%;
     max-width: 340px;
     font-size: 25px;
+    margin: 10px auto;
+  }
+
+  .user-container p {
+    margin: 0 auto;
+    margin-bottom: 25px;
   }
 
   .profile-pic {
