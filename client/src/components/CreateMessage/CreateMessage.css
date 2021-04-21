@@ -12,6 +12,10 @@
     width: 80%;
     margin: 0 auto;
 }
+.avatar {
+    width: 25px;
+    border-radius: 50%;
+}
 
 .search-results {
     display: flex;
@@ -24,31 +28,34 @@
     margin: 2px;
     padding: 10px;
     border: none;
-    width: 60%;
+    width: 50%;
     /* background-color: lightgray; */
 }
 
 .result-button:hover {
-    /* color:#4169E1; */
     color: white;
 }
 
 .result-button > div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 
-.result-button > div > .name {
+.details > .name {
     font-weight: bold;
 }
 
-.result-button > div > .email {
+.details > .email {
     font-style: italic;
     font-weight: normal;
     text-transform: lowercase;
+    align-self: flex-end;
 }
-
+.details  > p {
+    margin: 0;
+    padding-left: 10px;
+    display: flex;
+}
 #content {
     background-color:lightgray;
     border: none;

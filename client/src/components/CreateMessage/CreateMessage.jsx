@@ -63,12 +63,11 @@ export default function CreateMessage(props) {
                         return (
                         <button className="result-button" onClick={handleClick} id={user._id} name={user.name} key={user.id}>
                             <div>
-                                <div className="name">
-                                {user.name} 
-                                </div>
-                                <div className="email">
-                                {user.email}
-                                </div>
+                            <img className="avatar" src={user.imgURL}/>
+                            <div className="details">
+                                <p className="name">{user.name}</p>
+                                <p className="email">{user.job}</p>
+                            </div>
                             </div>
                         </button>
                         )
