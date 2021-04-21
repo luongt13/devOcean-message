@@ -9,6 +9,7 @@ export default function CreateMessage(props) {
     let [users, setUsers] = useState([])
     let [filteredUsers, setFilteredUsers] = useState([]);
     let [searchTerm, setSearchTerm] = useState("");
+    let [name, setName] = useState("")
     let { id } = useParams()
 
     const [formInput, setFormInput] = useState({
@@ -17,19 +18,16 @@ export default function CreateMessage(props) {
         receiver: "",
     })
 
-
     useEffect(() => {
         getData()
     }, [])
 
     async function getData() {
         let data = await getUsers()
-        console.log(data)
         setUsers(data)
     }
 
     function handleClick(e) {
-        console.log(e.target.id)
         let receiverId = e.target.id
         setFormInput((prevState) => ({
             ...prevState,
@@ -51,6 +49,7 @@ export default function CreateMessage(props) {
         await createMessage(formInput)
         props.setToggle()
     }
+    console.log(name)
     return (
         <div>
             <div className="search-bar">
@@ -61,17 +60,20 @@ export default function CreateMessage(props) {
                     users={users}
                     setFilteredUsers={setFilteredUsers}
                 />
+                <div className="search-results">
                 {filteredUsers.map((user) => {
                     return (
-                    <p onClick={handleClick} id={user._id} key={user.id}>
+                    <p onClick={handleClick} onClick={() => setName(user.name)}id={user._id} key={user.id}>
                     {user.name}
                     </p>
             )
         })}
+         </div>
         </div>
 
         <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
-             <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
+            <input value={name}/>
+            <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
             <button type="submit">Send</button>
         </form>
         </div>

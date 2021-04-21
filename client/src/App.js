@@ -10,17 +10,19 @@ import { useState, useEffect } from "react"
 import { verifyUser, findUser } from "./service/user"
 import SignUp from "./components/SignUp/SignUp.jsx"
 import SignIn from "./components/SignIn/SignIn.jsx"
-import {Route, useHistory} from "react-router-dom"
+import {Redirect, Route, useHistory} from "react-router-dom"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [email, setEmail] = useState(null)
   const [userData, setUserData] = useState(null)
-
   let history = useHistory()
+
   const logout = async () => {
     await localStorage.clear()
     setCurrentUser(null)
+    setUserData(null)
+    setEmail(null)
     history.push("/sign-in")
   }
 
@@ -43,8 +45,12 @@ console.log(email)
       getUserData()
     }
 
-    if(userData) {
-      history.push("/users")
+    const renderEdit = () => {
+      if(currentUser) {
+        return <UpdateUser/>
+      } else {
+        return <Redirect to="/sign-in"/>
+      }
     }
   
   return (
@@ -63,7 +69,8 @@ console.log(email)
         <UserProfile />
       </Route>
       <Route path="/update-user/:id">
-        <UpdateUser />
+        {/* <UpdateUser /> */}
+        {renderEdit()}
       </Route>
       <Route path="/messages/:id">
         <MessageList/>
