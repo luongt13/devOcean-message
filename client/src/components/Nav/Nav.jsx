@@ -25,7 +25,7 @@ export default function Nav(props) {
     }
     return (
         <div className="nav">
-        <img src="https://res.cloudinary.com/dbmxg3su8/image/upload/v1619026818/Screen_Shot_2021-04-21_at_1.34.18_PM_tlxzge.png" alt="logo" width="300" height="80"></img>
+        <img className="logo" src="https://res.cloudinary.com/dbmxg3su8/image/upload/v1619026818/Screen_Shot_2021-04-21_at_1.34.18_PM_tlxzge.png" alt="logo" width="300" height="80"></img>
         {displayNav()}
         </div>
     )

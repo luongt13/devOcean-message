@@ -12,10 +12,9 @@ code {
     monospace;
 }
 
-html,
-body {
+html, body {
   height: 100%;
-  /* margin-top: 50px; */
+  margin-top: 50px;
   align-content: center;
 }
 
