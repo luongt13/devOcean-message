@@ -1,8 +1,8 @@
 .create-message {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-
+    justify-content: center;
 }
 .input {
     display: flex;
@@ -56,4 +56,5 @@
     height: 50px;
     border-radius: 25px;
     padding: 5px;
+    margin: 10px 5px 10px 5px;
 }
