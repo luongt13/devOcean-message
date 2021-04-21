@@ -15,14 +15,12 @@ const createMessage = async (req,res) => {
             receiver,
             sender,
         }
-        console.log(req.body)
         //look for user sender by email
         let foundSender = await User.findById(sender)
         //look for user receiver by email
         let foundReceiver = await User.findById(receiver)
         //// an array and it has to match for sender AND receiver 
         let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}})
-        console.log(foundConversation)
         if (foundConversation.length === 0) {
               //if conversation is not found then create conversation
             let newConversation = await Conversation.create({users: [foundSender, foundReceiver], message: []})
@@ -35,20 +33,24 @@ const createMessage = async (req,res) => {
                 {_id: foundReceiver._id},
                 {$push: {conversations: newConversation._id}})
             //push new message into conversation messages
-            let msg = await Message.create(newMessage)
+            if(newMessage.content !== undefined) {
+                let msg = await Message.create(newMessage)
             await Conversation.findByIdAndUpdate(
                 {_id: newConversation._id},
                 {$push: {messages: msg._id}}
                 )
+            }
             return res.status(201).json(newConversation)
         } else {
-            //push new message into conversation messages
-            let msg = await Message.create(newMessage)
-            await Conversation.findByIdAndUpdate(
-                {_id: foundConversation[0]._id},
-                {$push: {messages: msg._id}},
-                {new: true}
-            )
+            if(newMessage.content !== undefined) {
+                //  push new message into conversation messages
+                let msg = await Message.create(newMessage)
+                await Conversation.findByIdAndUpdate(
+                    {_id: foundConversation[0]._id},
+                    {$push: {messages: msg._id}},
+                    {new: true}
+                ).populate("messages")
+            } 
             return res.status(201).json(foundConversation)
         }
     } catch (err) {
