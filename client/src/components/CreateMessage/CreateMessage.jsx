@@ -16,28 +16,25 @@ export default function CreateMessage(props) {
         sender: id,
         receiver: "",
     })
-
-
+    //get users for search feature
     useEffect(() => {
         getData()
     }, [])
 
     async function getData() {
         let data = await getUsers()
-        console.log(data)
         setUsers(data)
     }
-
+    //when user clicks the user, it sets search box to name chosen
     function handleClick(e) {
-        console.log(e.target.id)
-        let receiverId = e.target.id
+        let {id, name} = e.target
         setFormInput((prevState) => ({
             ...prevState,
-            receiver: receiverId
+            receiver: id
         }))
-        setSearchTerm("")
+        setSearchTerm(name)
     }
-
+    //set form data on change of message box
     function handleChange(event) {
         let {id, value} = event.target
         setFormInput((prevState) => ({
@@ -45,12 +42,13 @@ export default function CreateMessage(props) {
             [id]: value
         }))
     }
-
+    //create message
     async function handleSubmit(event) {
         event.preventDefault()
         await createMessage(formInput)
         props.setToggle()
     }
+
     return (
         <div>
             <div className="search-bar">
@@ -61,19 +59,20 @@ export default function CreateMessage(props) {
                     users={users}
                     setFilteredUsers={setFilteredUsers}
                 />
-                {filteredUsers.map((user) => {
-                    return (
-                    <p onClick={handleClick} id={user._id} key={user.id}>
-                    {user.name}
-                    </p>
-            )
-        })}
-        </div>
-
-        <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
-             <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
-            <button type="submit">Send</button>
-        </form>
+                <div className="search-results">
+                    {searchTerm.length > 1 && filteredUsers.map((user) => {
+                        return (
+                        <button onClick={handleClick} id={user._id} name={user.name} key={user.id}>
+                        {user.name}
+                        </button>
+                        )
+                    })}
+                </div>
+            </div>
+            <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
+                <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
+                <button type="submit">Send</button>
+            </form>
         </div>
     )
 }

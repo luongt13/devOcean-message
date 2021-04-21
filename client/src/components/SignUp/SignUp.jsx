@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signUp, signIn } from "../../service/user";
+import {useHistory} from "react-router-dom"
 import "./SignUp.css"
 
 export default function SignUp(props) {
@@ -15,7 +16,7 @@ export default function SignUp(props) {
     professionalLink: "",
     about: "",
   };
-
+  let history = useHistory()
   const [input, setInput] = useState(defaultInput);
 
   const handleChange = (event) => {
@@ -29,9 +30,9 @@ export default function SignUp(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signUp(input);
-    let res = await signIn(input);
-
+    let res = await signIn(input)
     props.setCurrentUser(res.payload);
+    history.push("/sign-in")
   };
 
   return (

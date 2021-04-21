@@ -5,12 +5,13 @@ import {useToggle} from "../../hooks/useToggle"
 import MessageItem from "../Message/MessageItem.jsx"
 import CreateMessage from "../CreateMessage/CreateMessage.jsx"
 import "./MessageList.css"
+
 export default function MessageList() {
     const [conversations, setConversations] = useState()
     const [refresh, setRefresh] = useState(false)
     const [isToggled, toggle] = useToggle(false)
     let {id} = useParams()
-
+    //get the conversations
     useEffect(() => {
         getUserCon()
     }, [refresh, isToggled])
@@ -19,7 +20,7 @@ export default function MessageList() {
         const data = await getConversations(id)
         setConversations(data.conversations)
     }
-    // sort the array by date????
+    
     return (
         <div className="message-list">
             <div className="buttons">
