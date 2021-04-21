@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import { getUser } from "../../service/user.js"
 import { useParams, useHistory } from "react-router-dom"
@@ -11,6 +10,7 @@ export default function UserProfile(props) {
   let { id } = useParams()
   let history = useHistory()
   let userLogged = props.userData
+
   useEffect(() => {
     getUserData();
   }, [id]);
@@ -20,7 +20,7 @@ export default function UserProfile(props) {
       history.push(`/details/${found._id}`)
     }
   }, [found])
-  
+
   async function getUserData() {
     let data = await getUser(id)
     setUser(data)
