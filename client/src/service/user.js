@@ -39,19 +39,19 @@ export const findUser = async (body) => {
 }
 
 export const getUsers = async () => {
-  const response = await api.get("/users")
-  const users = response.data
-  return users
+    const response = await api.get("/users")
+    const users = response.data
+    return users
 }
 
 export const getUser = async (id) => {
-  const response = await api.get(`/users/${id}`)
-  const user = response.data
-  return user
+    const response = await api.get(`/users/${id}`)
+    const user = response.data
+    return user
 }
 
-export const updateUser = async (id) => {
-  const response = await api.put(`/users/${id}`)
+export const updateUser = async (id, input) => {
+  const response = await api.put(`/users/${id}`, input)
   const updatedUser = response.data
   return updatedUser
 }

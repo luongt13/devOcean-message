@@ -1,23 +1,15 @@
 import { useEffect, useState } from "react"
 import { getUsers } from "../../service/user"
 import { Link } from "react-router-dom";
-import Fuse from "fuse.js"
+import Search from "../../components/Search/Search.jsx"
+import User from "../../components/User/User.jsx"
 
 function UserList() {
-  // let [query, setQuery] = useState('')
   let [users, setUsers] = useState([])
+  let [filteredUsers, setFilteredUsers] = useState([]);
+  let [currentUser, setCurrentUser] = useState({});
+  let [searchTerm, setSearchTerm] = useState("");
 
-  // const fuse = new Fuse(users, {
-  //   keys: [
-  //     'name',
-  //     'job',
-  //     'location'
-  //   ],
-  //   includeScore: true
-  // })
-
-  // const results = fuse.search(query)
-  // const userResults = query ? results.map(result => result.item) : users
 
   useEffect(() => {
     getData()
@@ -29,22 +21,39 @@ function UserList() {
     setUsers(data)
   }
 
-  // function handleChange({ currentTarget }) {
-  //   const { value } = currentTarget
-  //   setQuery(value)
-  // }
+  function handleClick(e) {
+    let found = users.find((user) => {
+      return user.id === e.target.id
+    })
 
+    setCurrentUser(found)
+    setSearchTerm("")
+  }
 
   return (
     <div>
-      <label htmlFor='search'>Search</label>
-      <input
-        type='text'
-        name='search'
-        id='search'
-        // value={query}
-        // onChange={handleChange}
-      />
+      <div className="search-bar">
+        <Search
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          setUsers={setUsers}
+          users={users}
+          setFilteredUsers={setFilteredUsers}
+        />
+        {searchTerm.length > 1 && filteredUsers.map((user) => {
+          return (
+            <Link to={`/users/${user._id}`}><p onClick={handleClick} id={user.id} key={user.id}>
+              <img src={user.imgURL} height={30} width={30} alt="mini profile pic" />
+              {user.name}
+            </p>
+            </Link>
+          )
+        })}
+      </div>
+
+      <div>
+        <User currentUser={currentUser} />
+      </div>
 
       <div>
         {users.map((user) => {

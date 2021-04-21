@@ -15,6 +15,7 @@ const createMessage = async (req,res) => {
             receiver,
             sender,
         }
+        console.log(req.body)
         //look for user sender by email
         let foundSender = await User.findById(sender)
         //look for user receiver by email
@@ -75,17 +76,14 @@ const getAllMessages = async (req,res) => {
         let user = await Conversation.findById(req.params.id).populate({
             path: "messages",
             model: "Message",
-                // populate: {
-                // [{
-                //     path: "messages",
-                //     model: "Message"
-                // }],
-                // [{
-                //     path: "users",
-                //     model: "User"
-                // }]
-            // }
-        })
+              populate: [{
+                path: "sender",
+                model: "User",
+            }, {
+                path: "receiver",
+                model: "User"
+            }]
+        }).populate("users")
         return res.status(200).json(user)
     } catch (err) {
         return res.status(500).json({error: err.message})
@@ -95,7 +93,6 @@ const getAllMessages = async (req,res) => {
 const deleteMessage = async (req, res) => {
     try {
         let deletedMessage = await Message.findByIdAndDelete(req.params.id)
-        console.log(deletedMessage)
         let foundConversation = await Conversation.findOne({messages: {$in: [{_id: deletedMessage._id}]}})
         await foundConversation.messages.pull({_id: deletedMessage._id})
         await foundConversation.save()

@@ -4,28 +4,32 @@ import {createMessage} from "../../service/message"
 import "./SendMessage.css"
 
 export default function SendMessage(props) {
-    console.log(props.userData)
-    console.log(props.users)
-
-    let receive = props.users.filter((item) => item !== props.userData)
-    // let {id} = useParams()
-    let receiver = receive
-    // let receiver = "6079fbc876ea7f675d84f735"
+    let receive =[]
+    if(props.users) {
+        props.users.forEach((item) => {
+            if(item._id !== props.userData) {
+                receive.push(item._id)
+            }
+        })
+    }
+    let receiver = receive.toString()
     let sender = props.userData
 
     let defaultInput = {
         content: "",
         sender: sender,
-        receiver: receiver
+        receiver: receiver,
     }
     const [message, setMessage] = useState(defaultInput)
-    
+
     function handleChange(event) {
         setMessage((prevState) => ({
             ...prevState,
+            receiver: receiver,
             content: event.target.value
         }))
     }
+
     async function handleSubmit(event) {
         event.preventDefault()
         await createMessage(message)

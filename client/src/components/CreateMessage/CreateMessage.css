@@ -14,9 +14,10 @@
     margin: 0 auto;
 }
 #content {
-    background-color: aquamarine;
+    background-color:lightgray;
+    border: none;
     width: 80%;
     height: 50px;
-    border-radius: 15px;
+    border-radius: 25px;
     padding: 5px;
 }

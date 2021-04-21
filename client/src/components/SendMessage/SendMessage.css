@@ -4,13 +4,16 @@
    align-items: center;
    justify-content: center;
    width: 100%;
+   bottom: 0;
+   position: fixed;
 }
 
 #message {
-    background-color: aquamarine;
     width: 80%;
     height: 50px;
-    border-radius: 15px;
+    border-radius: 25px;
     padding: 5px;
     margin: 10px;
+    background-color: lightgray;
+    border: none
 }

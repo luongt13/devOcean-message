@@ -21,6 +21,7 @@ function App() {
   const logout = async () => {
     await localStorage.clear()
     setCurrentUser(null)
+    history.push("/sign-in")
   }
 
   useEffect(() => {
@@ -32,13 +33,12 @@ function App() {
     setCurrentUser(user)
     setEmail(user.email)
   }
-
+console.log(email)
   async function getUserData() {
     let res = await findUser({email: email})
     console.log(res)
     setUserData(res._id)
   }
-  console.log(userData)
     if(email) {
       getUserData()
     }
@@ -46,7 +46,7 @@ function App() {
     if(userData) {
       history.push("/users")
     }
-  
+
   return (
     <div className="App">
       <Nav currentUser={currentUser} logout={logout} userData={userData}/>
@@ -63,7 +63,7 @@ function App() {
         <UserProfile />
       </Route>
       <Route path="/update-user/:id">
-        <UpdateUser />
+        <UpdateUser userData={userData} />
       </Route>
       <Route path="/messages/:id">
         <MessageList/>
@@ -72,7 +72,7 @@ function App() {
         <MessageDetails userData={userData}/>
       </Route>
     </div>
-  );
+  )
 }
 
 export default App;
