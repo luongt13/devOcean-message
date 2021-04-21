@@ -1,4 +1,5 @@
 import React from "react";
+import "./Search.css"
 
 function Search(props) {
     // destructuring props so I dont have to call props before each item
@@ -21,7 +22,7 @@ function Search(props) {
     // Returning a label and input that have their value and onchange controlled by the search term
     // state we set in SongList.jsx
     return (
-        <div>
+        <div className="search-input">
             <label htmlFor='search'>Search</label>
             <input
                 type='text'

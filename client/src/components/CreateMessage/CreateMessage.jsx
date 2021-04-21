@@ -27,7 +27,7 @@ export default function CreateMessage(props) {
     }
     //when user clicks the user, it sets search box to name chosen
     function handleClick(e) {
-        let {id, name} = e.target
+        let {id, name} = e.currentTarget
         setFormInput((prevState) => ({
             ...prevState,
             receiver: id
@@ -48,7 +48,6 @@ export default function CreateMessage(props) {
         await createMessage(formInput)
         props.setToggle()
     }
-
     return (
         <div>
             <div className="search-bar">
@@ -62,8 +61,14 @@ export default function CreateMessage(props) {
                 <div className="search-results">
                     {searchTerm.length > 1 && filteredUsers.map((user) => {
                         return (
-                        <button onClick={handleClick} id={user._id} name={user.name} key={user.id}>
-                        {user.name}
+                        <button className="result-button" onClick={handleClick} id={user._id} name={user.name} key={user.id}>
+                            <div>
+                            <img className="avatar" src={user.imgURL}/>
+                            <div className="details">
+                                <p className="name">{user.name}</p>
+                                <p className="email">{user.job}</p>
+                            </div>
+                            </div>
                         </button>
                         )
                     })}
