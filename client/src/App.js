@@ -49,34 +49,65 @@ function App() {
     if(currentUser) {
       return <UpdateUser userData={userData}/>
     } else {
-      return <Redirect to="/sign-in"/>
+      return <Redirect to="/"/>
     }
   }
-  //add in logic like the render edit above
+
+  const renderUserList = () => {
+    if(currentUser) {
+      return <UserList userData={userData}/>
+    } else {
+      return <Redirect to="/"/>
+    }
+  }
+
+  const renderUserProfile = () => {
+    if(currentUser) {
+      return <UserProfile userData={userData}/>
+    } else {
+      return <Redirect to="/"/>
+    }
+  }
+
+  const renderMessageList = () => {
+    if(currentUser) {
+      return <MessageList/>
+    } else {
+      return <Redirect to="/"/>
+    }
+  }
+  
+  const renderMessageDetails = () => {
+    if(currentUser) {
+      return <MessageDetails userData={userData}/>
+    } else {
+      return <Redirect to="/"/>
+    }
+  }
+  
   return (
     <div className="App">
       <Nav currentUser={currentUser} logout={logout} userData={userData}/>
-      <Route path="/sign-in">
+      <Route exact path="/">
         <SignIn setCurrentUser={setCurrentUser} />
       </Route>
-      <Route path="/sign-up">
+      <Route exact path="/sign-up">
         <SignUp setCurrentUser={setCurrentUser} />
       </Route>
       <Route exact path="/users">
-        <UserList userData={userData}/>
+        {renderUserList()}
       </Route>
-      <Route path="/users/:id">
-        <UserProfile userData={userData}/>
+      <Route exact path="/users/:id">
+        {renderUserProfile()}
       </Route>
-      <Route path="/update-user/:id">
-        {/* <UpdateUser /> */}
+      <Route exact path="/update-user/:id">
         {renderEdit()}
       </Route>
-      <Route path="/messages/:id">
-        <MessageList/>
+      <Route exact path="/messages/:id">
+        {renderMessageList()}
       </Route>
-      <Route path="/details/:id">
-        <MessageDetails userData={userData}/>
+      <Route exact path="/details/:id">
+        {renderMessageDetails()}
       </Route>
     </div>
   )
