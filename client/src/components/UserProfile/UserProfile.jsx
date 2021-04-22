@@ -20,7 +20,7 @@ export default function UserProfile(props) {
 
   useEffect(() => {
     if(found) {
-      history.push(`/details/${found._id}`)
+      history.push(`/details/${found[0]._id}`)
     }
       // eslint-disable-next-line
   }, [found])
