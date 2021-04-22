@@ -15,6 +15,7 @@ export default function MessageList() {
     useEffect(() => {
         getUserCon()
         window.scrollTo(0, 0)
+          // eslint-disable-next-line
     }, [refresh, isToggled])
     
     const getUserCon = async () => {
@@ -24,8 +25,8 @@ export default function MessageList() {
     return (
         <div className="message-list">
             <div className="buttons">
-                <button className="add" onClick={toggle} title="start a conversation"><img src="https://cdn.iconscout.com/icon/free/png-512/add-new-1439785-1214356.png"/>Start A Conversation</button>
-                <button title="refresh" className="refresh"onClick={() => setRefresh((prevState) => !prevState)}><img src="https://image.flaticon.com/icons/png/512/61/61444.png"/>Refresh</button>
+                <button className="add" onClick={toggle} title="start a conversation"><img src="https://cdn.iconscout.com/icon/free/png-512/add-new-1439785-1214356.png" alt="add button"/>Start A Conversation</button>
+                <button title="refresh" className="refresh"onClick={() => setRefresh((prevState) => !prevState)}><img src="https://image.flaticon.com/icons/png/512/61/61444.png" alt="refresh button"/>Refresh</button>
             </div>
             
             {isToggled ? <CreateMessage setToggle={toggle}/> : null}

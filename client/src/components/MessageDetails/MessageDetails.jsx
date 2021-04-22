@@ -1,4 +1,4 @@
-import {useEffect, useState, useRef} from 'react'
+import {useEffect, useState, useRef, useMemo} from 'react'
 import {useParams} from "react-router-dom"
 import {deleteMessage, getMessages} from "../../service/message"
 import SendMessage from "../SendMessage/SendMessage.jsx"
@@ -12,17 +12,17 @@ export default function MessageDetails(props) {
     const [displayName, setDisplayName] = useState("")
     const messageRef = useRef()
     let {id} = useParams()
-    let receiveName = []
+    let receiveName = useMemo(() => [], [users])
 
     useEffect(() => {
         getData()
         messageRef.current && window.scrollTo(0, messageRef.current.getBoundingClientRect().bottom)
+         // eslint-disable-next-line
     }, [isToggled, messageRef.current])
 
-    window.scrollTo(0, 744)
-    // messageRef.current && console.log(messageRef.current.getBoundingClientRect().bottom)
     useEffect(() => {
         setDisplayName(receiveName.toString())
+        //  eslint-disable-next-line
     }, [receiveName])
 
     const getData = async () => {
@@ -44,8 +44,6 @@ export default function MessageDetails(props) {
         deleteMessage(message)
         getData()
     }
-
-
 //if sender is from user logged in then make it different somehow
     return (
         <div className="message-page">
