@@ -28,12 +28,14 @@ function App() {
   //verify user
   useEffect(() => {
     requestVerification()
+      // eslint-disable-next-line
   }, [])
   //invoke get data (user id) when currentUser changes and if its true
   useEffect(() => {
     if(currentUser) {
       getUserData()
     }
+      // eslint-disable-next-line
   }, [currentUser])
   //verify user and set to current user
   const requestVerification = async () => {
@@ -87,7 +89,7 @@ function App() {
   }
   
   const renderMessageDetails = () => {
-    if(currentUser) {
+    if(currentUser && userData) {
       return <MessageDetails userData={userData}/>
     } else if (currentUser === false){
       return <Redirect to="/"/>

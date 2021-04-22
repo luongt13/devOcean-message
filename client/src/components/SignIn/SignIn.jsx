@@ -31,7 +31,6 @@ export default function SignIn(props) {
       props.setCurrentUser(res.payload)
       history.push("/users")
     }
-    console.log(res)
   }
 
   return (
@@ -44,7 +43,7 @@ export default function SignIn(props) {
           className = "input"
           type="email"
           name="email"
-          value={input.email}
+          defaultValue={input.email}
           placeholder="Enter email..."
           required 
         />
@@ -53,7 +52,7 @@ export default function SignIn(props) {
           className = "input"
           type="password"
           name="password"
-          value={input.password}
+          defaultValue={input.password}
           placeholder="Enter password..."
           required 
         />

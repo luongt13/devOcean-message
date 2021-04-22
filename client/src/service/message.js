@@ -31,7 +31,7 @@ export const createMessage = async (body) => {
 //delete message
 export const deleteMessage = async (id) => {
     try {
-        let res = await api.delete(`messages/${id}`)
+        await api.delete(`messages/${id}`)
     } catch (err) {
         throw err
     }
