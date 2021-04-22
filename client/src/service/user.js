@@ -51,7 +51,7 @@ export const getUser = async (id) => {
 }
 
 export const updateUser = async (id, input) => {
-  const response = await api.put(`/users/${id}`, input)
-  const updatedUser = response.data
-  return updatedUser
+    const response = await api.put(`/users/${id}`, input)
+    const updatedUser = response.data
+    return updatedUser
 }
