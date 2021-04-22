@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { updateUser } from "../../service/user"
-import { useHistory } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
+import { getUser } from "../../service/user.js"
+
 
 export default function UpdateUser(props) {
+  let { id } = useParams()
+  let [user, setUser] = useState({})
+
+  useEffect(() => {
+    getUserData();
+  }, [id]);
+  
+  async function getUserData() {
+    let data = await getUser(id)
+    setUser(data)
+  }
+  
   const defaultInput = {
-    name: "",
+    name:  "" ,
     email: "",
     imgURL: "",
     location: "",
@@ -43,6 +57,7 @@ export default function UpdateUser(props) {
           className = "input"
           name="name"
           placeholder="Enter name..."
+          value={user.name}
         />
         <label className="label">Email</label>
           <input
@@ -50,6 +65,7 @@ export default function UpdateUser(props) {
           type="email"
           name="email"
           placeholder="Enter email..."
+          value={user.email}  
         />
         <label className="label">Profile Image</label>
           <input
@@ -57,6 +73,7 @@ export default function UpdateUser(props) {
           type="text"
           name="imgURL"
           placeholder="Enter URL for image..."
+          value={user.imgURL}
         />
         <label className="label">Location</label>
           <input
@@ -64,6 +81,7 @@ export default function UpdateUser(props) {
           type="text"
           name="location"
           placeholder="Enter location..."
+          value={user.location}  
         />
         <label className="label">Job Title</label>
           <input
@@ -71,6 +89,7 @@ export default function UpdateUser(props) {
           type="text"
           name="job"
           placeholder="Enter job title..."
+          value={user.job}  
         />
         <label className="label">Languages</label>
           <input
@@ -78,6 +97,7 @@ export default function UpdateUser(props) {
           type="text"
           name="languages"
           placeholder="Enter languages..."
+          value={user.languages}  
         />
         <label className="label">Professional Link</label>
           <input
@@ -85,13 +105,16 @@ export default function UpdateUser(props) {
           type="text"
           name="professionalLink"
           placeholder="Enter professional link URL..."
+          value={user.professionalLink}  
         /> 
         <label className="label">About Me</label>
-          <input
+          <textarea
+          rows= "3"
           className = "input"
           type="text"
           name="about"
           placeholder="Enter about me..."
+          value={user.about}  
         />
         <button className="submit" type="submit">Submit</button>
         </form>
