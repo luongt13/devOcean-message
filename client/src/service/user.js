@@ -15,7 +15,7 @@ export const signIn = async (credentials) => {
         localStorage.setItem("token", res.data.token);
         return res.data;
     } catch (err) {
-        throw err;
+        return err.response.status
     }
 }  
 
