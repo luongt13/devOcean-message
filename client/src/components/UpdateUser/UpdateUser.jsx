@@ -44,7 +44,7 @@ export default function UpdateUser(props) {
     let id = props.userData
     await updateUser(id, input);
     setInput(input)
-    history.push(`/users`)
+    history.push(`/users/${id}`)
   };
 
   return (
