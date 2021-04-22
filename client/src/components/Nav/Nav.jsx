@@ -17,7 +17,7 @@ export default function Nav(props) {
         } else {
             return (
                 <div className="links">
-                    <Link to="/sign-in">Sign In</Link>
+                    <Link to="/">Sign In</Link>
                     <Link to="/sign-up">Sign Up</Link>
                 </div>
             )
