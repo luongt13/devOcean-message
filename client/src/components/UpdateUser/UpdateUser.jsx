@@ -65,7 +65,8 @@ export default function UpdateUser(props) {
           type="email"
           name="email"
           placeholder="Enter email..."
-          defaultValue={user.email}  
+          defaultValue={user.email} 
+          required 
         />
         <label className="label">Profile Image</label>
           <input

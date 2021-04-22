@@ -7,7 +7,6 @@ const router = Router()
 router.get("/:id", getAllMessages)
 router.post("/", createMessage)
 router.post("/", restrict, createMessage)
-// router.delete("/:id", deleteMessage)
 router.delete("/:id", restrict, deleteMessage)
 
 module.exports = router

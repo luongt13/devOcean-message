@@ -32,7 +32,6 @@ export default function SignIn(props) {
       <h3 className="form-title">Sign In</h3>
       <div className="form-container">
       <form className="sign-in-form"onChange={handleChange} onSubmit={handleSubmit}>
-      {/* <label className="label">Name</label> */}
         <label className="label">Email</label>
         <input
           className = "input"
@@ -40,6 +39,7 @@ export default function SignIn(props) {
           name="email"
           value={input.email}
           placeholder="Enter email..."
+          required 
         />
         <label className="label">Password</label>
         <input
@@ -48,6 +48,7 @@ export default function SignIn(props) {
           name="password"
           value={input.password}
           placeholder="Enter password..."
+          required 
         />
         <button className="submit" type="submit">Sign In</button>
       </form>

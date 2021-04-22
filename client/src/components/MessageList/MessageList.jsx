@@ -20,7 +20,6 @@ export default function MessageList() {
         const data = await getConversations(id)
         setConversations(data.conversations)
     }
-    console.log(conversations)
     return (
         <div className="message-list">
             <div className="buttons">
