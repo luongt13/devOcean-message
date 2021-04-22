@@ -22,7 +22,7 @@ function App() {
     await localStorage.clear()
     setCurrentUser(null)
     setUserData(null)
-    history.push("/sign-in")
+    history.push("/")
   }
   //verify user
   useEffect(() => {

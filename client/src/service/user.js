@@ -12,10 +12,11 @@ export const signUp = async (credentials) => {
 export const signIn = async (credentials) => {
     try {
         const res = await api.post("/sign-in", credentials);
+        console.log(res)
         localStorage.setItem("token", res.data.token);
         return res.data;
     } catch (err) {
-        throw err;
+        return err.response.status
     }
 }  
 

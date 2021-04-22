@@ -23,8 +23,15 @@ export default function SignIn(props) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     let res = await signIn(input)
-    props.setCurrentUser(res.payload)
-    history.push("/users")
+    if(res === 400) {
+      alert("User not found")
+    } else if (res === 401) {
+      alert("Password Invalid")
+    } else {
+      props.setCurrentUser(res.payload)
+      history.push("/users")
+    }
+    console.log(res)
   }
 
   return (
