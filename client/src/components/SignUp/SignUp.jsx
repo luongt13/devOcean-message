@@ -32,7 +32,7 @@ export default function SignUp(props) {
     await signUp(input);
     let res = await signIn(input)
     props.setCurrentUser(res.payload);
-    history.push("/sign-in")
+    history.push("/")
   };
 
   return (
