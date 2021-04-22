@@ -45,7 +45,8 @@ export default function SignUp(props) {
           className = "input"
           name="name"
           value={input.name}
-          placeholder="Enter username..."
+          placeholder="Enter name..."
+          required 
         />
         <label className="label">Email</label>
         <input
@@ -54,6 +55,7 @@ export default function SignUp(props) {
           name="email"
           value={input.email}
           placeholder="Enter email..."
+          required 
         />
         <label className="label">Password</label>
         <input
@@ -62,6 +64,7 @@ export default function SignUp(props) {
           name="password"
           value={input.password}
           placeholder="Enter password..."
+          required 
         />
         <label className="label">Password Confirmation</label>
         <input
@@ -70,6 +73,7 @@ export default function SignUp(props) {
           name="passwordConfirmation"
           value={input.passwordConfirmation}
           placeholder="reenter password..."
+          required 
         />
         <label className="label">Profile Image</label>
         <input

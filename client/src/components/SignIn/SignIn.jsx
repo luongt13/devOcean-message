@@ -40,6 +40,7 @@ export default function SignIn(props) {
           name="email"
           value={input.email}
           placeholder="Enter email..."
+          required 
         />
         <label className="label">Password</label>
         <input
@@ -48,6 +49,7 @@ export default function SignIn(props) {
           name="password"
           value={input.password}
           placeholder="Enter password..."
+          required 
         />
         <button className="submit" type="submit">Sign In</button>
       </form>
