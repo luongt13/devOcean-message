@@ -1,7 +1,8 @@
 const mongoose = require("mongoose")
 
+const MONGODBURI = process.env.PROD_MONGODB || "mongodb://127.0.0.1:27017/devOceanDatabase"
 mongoose
-    .connect("mongodb://127.0.0.1:27017/devOceanDatabase", {
+    .connect(MONGODBURI, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
     })
