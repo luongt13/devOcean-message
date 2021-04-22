@@ -44,11 +44,17 @@ function UserList() {
       <div className="search-results">
         {searchTerm.length > 1 && filteredUsers.map((user) => {
           return (
-            <Link to={`/users/${user._id}`}><p onClick={handleClick} id={user.id} key={user.id}>
-              <img src={user.imgURL} height={30} width={30} alt="mini profile pic" />
-              {user.name}
-            </p>
-            </Link>
+            <Link className="result-button" to={`/users/${user._id}`}>
+            <button className="result-button" onClick={handleClick} id={user.id} key={user.id}>
+              <div>
+                  <img className="avatar" src={user.imgURL}/>
+                  <div className="details">
+                  <p className="name">{user.name}</p>
+                  <p className="email">{user.job}</p>
+                  </div>
+              </div>
+              </button>
+              </Link>
           )
         })}
       </div>
@@ -67,7 +73,10 @@ function UserList() {
               <Link to={`/users/${user._id}`} key={user._id}>
                 <h3 className="user-name">{user.name}</h3>
               </Link>
-              <p>{user.job}</p>              
+              <div className="job-location">
+                <p>{user.job}</p>              
+                <p>{user.location}</p>
+              </div>
             </div>
           )
         })}
