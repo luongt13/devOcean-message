@@ -18,14 +18,14 @@ export default function UpdateUser(props) {
   }
   
   const defaultInput = {
-    name:  "" ,
-    email: "",
-    imgURL: "",
-    location: "",
-    job: "",
-    languages: "",
-    professionalLink: "",
-    about: "",
+    name:  user.name ,
+    email: user.email,
+    imgURL: user.imgUrl,
+    location: user.location,
+    job: user.job,
+    languages: user.languages,
+    professionalLink: user.professionalLink,
+    about: user.about,
   };
 
   const history = useHistory();
@@ -57,7 +57,7 @@ export default function UpdateUser(props) {
           className = "input"
           name="name"
           placeholder="Enter name..."
-          value={user.name}
+          defaultValue={user.name}
         />
         <label className="label">Email</label>
           <input
@@ -65,7 +65,7 @@ export default function UpdateUser(props) {
           type="email"
           name="email"
           placeholder="Enter email..."
-          value={user.email}  
+          defaultValue={user.email}  
         />
         <label className="label">Profile Image</label>
           <input
@@ -73,7 +73,7 @@ export default function UpdateUser(props) {
           type="text"
           name="imgURL"
           placeholder="Enter URL for image..."
-          value={user.imgURL}
+          defaultValue={user.imgURL}
         />
         <label className="label">Location</label>
           <input
@@ -81,7 +81,7 @@ export default function UpdateUser(props) {
           type="text"
           name="location"
           placeholder="Enter location..."
-          value={user.location}  
+          defaultValue={user.location}  
         />
         <label className="label">Job Title</label>
           <input
@@ -89,7 +89,7 @@ export default function UpdateUser(props) {
           type="text"
           name="job"
           placeholder="Enter job title..."
-          value={user.job}  
+          defaultValue={user.job}  
         />
         <label className="label">Languages</label>
           <input
@@ -97,7 +97,7 @@ export default function UpdateUser(props) {
           type="text"
           name="languages"
           placeholder="Enter languages..."
-          value={user.languages}  
+          defaultValue={user.languages}  
         />
         <label className="label">Professional Link</label>
           <input
@@ -105,7 +105,7 @@ export default function UpdateUser(props) {
           type="text"
           name="professionalLink"
           placeholder="Enter professional link URL..."
-          value={user.professionalLink}  
+          defaultValue={user.professionalLink}  
         /> 
         <label className="label">About Me</label>
           <textarea
@@ -114,7 +114,7 @@ export default function UpdateUser(props) {
           type="text"
           name="about"
           placeholder="Enter about me..."
-          value={user.about}  
+          defaultValue={user.about}  
         />
         <button className="submit" type="submit">Submit</button>
         </form>
