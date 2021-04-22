@@ -1,0 +1,49 @@
+.user-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 40%;
+    margin-left: 50px;
+}
+
+.about {
+    margin-top: 50px;
+    width: 60%;
+}
+
+.user-info-contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-btn {
+    padding: 10px;
+    align-self: flex-end;
+    margin: 10px 50px 10px 0;
+}
+
+.user-btn:hover {
+    background-color:#4169E1;
+    border-radius: 15px;
+}
+.user-image {
+    border-radius: 50%;
+    align-self: center;
+}
+
+@media screen and (max-width: 650px) {
+    .user-info {
+        flex-direction: column;
+    }
+    .about {
+        width: 80%;
+    }
+}

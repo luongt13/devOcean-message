@@ -52,7 +52,7 @@ function App() {
       return <Redirect to="/sign-in"/>
     }
   }
-  
+  //add in logic like the render edit above
   return (
     <div className="App">
       <Nav currentUser={currentUser} logout={logout} userData={userData}/>

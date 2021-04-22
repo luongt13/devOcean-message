@@ -11,3 +11,9 @@
   align-items: center;
   margin-bottom: 30px;
 }
+
+@media screen and (max-width: 650px) {
+  .sign-in-form {
+    width: 80%;
+  }
+}
