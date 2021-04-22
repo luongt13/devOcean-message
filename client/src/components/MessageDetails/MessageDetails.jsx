@@ -12,16 +12,29 @@ export default function MessageDetails(props) {
     const [displayName, setDisplayName] = useState("")
     const messageRef = useRef()
     let {id} = useParams()
-    let receiveName = useMemo(() => [], [users])
+    let receiveName = useMemo(() =>     
+    {if(users) {
+        return users.reduce((acc, item) => {
+            if(item._id !== props.userData) {
+                return item.name
+            } else {
+                return acc
+            }
+        }, "")}
+    }, [users, props.userData])
 
     useEffect(() => {
         getData()
-        messageRef.current && window.scrollTo(0, messageRef.current.getBoundingClientRect().bottom)
          // eslint-disable-next-line
-    }, [isToggled, messageRef.current])
+    }, [isToggled])
 
     useEffect(() => {
-        setDisplayName(receiveName.toString())
+        messageRef.current && messageRef.current.scrollIntoView({behavior: "smooth"})
+         // eslint-disable-next-line
+    }, [messageRef.current, messages])
+
+    useEffect(() => {
+        setDisplayName(receiveName)
         //  eslint-disable-next-line
     }, [receiveName])
 
@@ -31,24 +44,16 @@ export default function MessageDetails(props) {
         setUsers(data.users)
     }
 
-    if(users) {
-        users.forEach((item) => {
-            if(item._id !== props.userData) {
-                receiveName.push(item.name)
-            }
-        })
-    }
-
     async function handleDelete(item) {
         let message = item._id
-        deleteMessage(message)
-        getData()
+        await deleteMessage(message)
+        toggle()
     }
 //if sender is from user logged in then make it different somehow
     return (
         <div className="message-page">
             <h3>{displayName}</h3>
-            <div className="messages" ref={messageRef}>
+            <div className="messages">
             {messages.map(item => {
                 if (item.sender._id === props.userData) {
                     return (
@@ -67,6 +72,7 @@ export default function MessageDetails(props) {
                     )
                 }
             })}
+            <div ref={messageRef}></div>
         </div>
         <div className="send-bar">
             <SendMessage users={users} setToggle={toggle} userData={props.userData}/>
