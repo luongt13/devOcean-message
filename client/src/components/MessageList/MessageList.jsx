@@ -14,6 +14,7 @@ export default function MessageList() {
     //get the conversations
     useEffect(() => {
         getUserCon()
+        window.scrollTo(0, 0)
     }, [refresh, isToggled])
     
     const getUserCon = async () => {
