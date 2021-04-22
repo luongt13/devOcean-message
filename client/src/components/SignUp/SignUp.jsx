@@ -44,7 +44,7 @@ export default function SignUp(props) {
         <input
           className = "input"
           name="name"
-          value={input.name}
+          defaultValue={input.name}
           placeholder="Enter name..."
           required 
         />
@@ -53,7 +53,7 @@ export default function SignUp(props) {
           className = "input"
           type="email"
           name="email"
-          value={input.email}
+          defaultValue={input.email}
           placeholder="Enter email..."
           required 
         />
@@ -62,7 +62,7 @@ export default function SignUp(props) {
           className = "input"
           type="password"
           name="password"
-          value={input.password}
+          defaultValue={input.password}
           placeholder="Enter password..."
           required 
         />
@@ -71,7 +71,7 @@ export default function SignUp(props) {
           className = "input"
           type="password"
           name="passwordConfirmation"
-          value={input.passwordConfirmation}
+          defaultValue={input.passwordConfirmation}
           placeholder="reenter password..."
           required 
         />
@@ -80,7 +80,7 @@ export default function SignUp(props) {
           className = "input"
           type="text"
           name="imgURL"
-          value={input.imgURL}
+          defaultValue={input.imgURL}
           placeholder="Enter URL for image..."
         />
         <label className="label">Location</label>
@@ -88,7 +88,7 @@ export default function SignUp(props) {
           className = "input"
           type="text"
           name="location"
-          value={input.location}
+          defaultValue={input.location}
           placeholder="Enter location..."
         />
         <label className="label">Job Title</label>
@@ -96,7 +96,7 @@ export default function SignUp(props) {
           className = "input"
           type="text"
           name="job"
-          value={input.job}
+          defaultValue={input.job}
           placeholder="Enter job title..."
         />
         <label className="label">Languages</label>
@@ -104,7 +104,7 @@ export default function SignUp(props) {
           className = "input"
           type="text"
           name="languages"
-          value={input.languages}
+          defaultValue={input.languages}
           placeholder="Enter languages..."
         />
         <label className="label">Professional Link</label>
@@ -112,7 +112,7 @@ export default function SignUp(props) {
           className = "input"
           type="text"
           name="professionalLink"
-          value={input.professionalLink}
+          defaultValue={input.professionalLink}
           placeholder="Enter professional link URL..."
         />
         <label className="label">About Me</label>
@@ -121,7 +121,7 @@ export default function SignUp(props) {
           className = "input"
           type="text"
           name="about"
-          value={input.about}
+          defaultValue={input.about}
           placeholder="Enter about me profile..."
         />
         <button className="submit" type="submit">Create Account</button>
