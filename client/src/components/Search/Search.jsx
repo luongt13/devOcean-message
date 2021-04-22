@@ -20,7 +20,6 @@ function Search(props) {
     // state we set in SongList.jsx
     return (
         <div className="search-input">
-            {/* <label htmlFor='search'>Search</label> */}
             <input
                 type='text'
                 name='search'

@@ -32,7 +32,6 @@ export default function SignIn(props) {
       <h3 className="form-title">Sign In</h3>
       <div className="form-container">
       <form className="sign-in-form"onChange={handleChange} onSubmit={handleSubmit}>
-      {/* <label className="label">Name</label> */}
         <label className="label">Email</label>
         <input
           className = "input"

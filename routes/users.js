@@ -12,5 +12,4 @@ router.put("/users/:id", restrict, updateUser)
 router.get("/verify", verify)
 router.post("/sign-in", signIn)
 
-
 module.exports = router
