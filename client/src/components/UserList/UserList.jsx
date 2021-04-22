@@ -14,6 +14,7 @@ function UserList() {
 
   useEffect(() => {
     getData()
+    window.scrollTo(0, 0)
   }, [])
 
   async function getData() {

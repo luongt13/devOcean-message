@@ -14,6 +14,7 @@ export default function UserProfile(props) {
 
   useEffect(() => {
     getUserData();
+    window.scrollTo(0, 0);
   }, [id]);
 
   useEffect(() => {

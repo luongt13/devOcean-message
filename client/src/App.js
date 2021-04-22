@@ -16,6 +16,7 @@ function App() {
   //set current user data and user id 
   const [currentUser, setCurrentUser] = useState(null)
   const [userData, setUserData] = useState(null)
+
   let history = useHistory()
   //handle logout
   const logout = async () => {
@@ -46,42 +47,52 @@ function App() {
   }
 
   const renderEdit = () => {
-    if(currentUser) {
-      return <UpdateUser userData={userData}/>
-    } else {
-      return <Redirect to="/"/>
+      if(currentUser) {
+        return <UpdateUser userData={userData}/>
+      } else if (currentUser === false) {
+        return <Redirect to="/"/>
+      } else {
+      return <div>Loading...</div>
     }
   }
 
   const renderUserList = () => {
     if(currentUser) {
       return <UserList userData={userData}/>
-    } else {
+    } else if (currentUser === false){
       return <Redirect to="/"/>
+    } else {
+      return <div>Loading...</div>
     }
   }
 
   const renderUserProfile = () => {
     if(currentUser) {
       return <UserProfile userData={userData}/>
-    } else {
+    } else if (currentUser === false){
       return <Redirect to="/"/>
+    } else {
+      return <div>Loading...</div>
     }
   }
 
   const renderMessageList = () => {
     if(currentUser) {
       return <MessageList/>
-    } else {
+    } else if (currentUser === false){
       return <Redirect to="/"/>
+    } else {
+      return <div>Loading...</div>
     }
   }
   
   const renderMessageDetails = () => {
     if(currentUser) {
       return <MessageDetails userData={userData}/>
-    } else {
+    } else if (currentUser === false){
       return <Redirect to="/"/>
+    } else {
+      return <div>Loading...</div>
     }
   }
   

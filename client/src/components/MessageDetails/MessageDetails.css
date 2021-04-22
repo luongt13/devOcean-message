@@ -24,6 +24,7 @@ h6 {
     height: 100vh;
     width: 100%;
     padding: 0;
+    margin-top: 200px;
 }
 
 .user {
@@ -40,8 +41,7 @@ h6 {
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow: scroll;
-    height: 75vh;
+    margin-bottom: 300px;
 }
 
 .send-bar {
