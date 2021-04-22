@@ -1,0 +1,78 @@
+.form-title {
+  padding-top: 20px;
+  font-size: 30px;
+}
+
+.form-container {
+  height: 60%;
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.sign-up-form {
+  background-color: #c9dae8;
+  height: 90%;
+  width: 60%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.label {
+  color: black;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 60%;
+  margin-bottom: 5px;
+  outline: none;
+  height: 20px;
+}
+
+.submit {
+  box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+  background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+  background-color: #79bbff;
+  border-radius: 6px;
+  border: 1px solid #84bbf3;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 29px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #528ecc;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.submit:hover {
+  background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+  background-color: #378de5;
+}
+.submit:active {
+  position: relative;
+  top: 1px;
+}
+
+@media screen and (max-width: 650px) {
+  .sign-up-form {
+    width: 80%;
+  }
+}

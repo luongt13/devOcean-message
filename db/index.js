@@ -14,8 +14,7 @@ mongoose
     });
 
 // comment out in production
-mongoose.set("debug", true)
-
+// mongoose.set("debug", true)
 const db = mongoose.connection
 
 module.exports = db

@@ -1,0 +1,18 @@
+.message-item {
+  border: 2px solid lightgray;
+  background-color: lightgray;
+  margin: 0 auto;
+  width: 100%;
+  text-align: left;
+  padding-left: 20px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.message-item:hover {
+  background-color:	#4169E1;
+  border: 2px solid #4169E1;
+}

@@ -1,0 +1,36 @@
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.message-list {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.refresh, .add {
+    border: none;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: lightgray;
+}
+
+.refresh:hover, .add:hover {
+    background-color:#4169E1;
+
+}
+
+.refresh img {
+    width: 20px;
+    padding: 3px;
+}
+
+.add img {
+    width: 25px;
+}

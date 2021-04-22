@@ -33,55 +33,65 @@ const createMessage = async (req,res) => {
                 {_id: foundReceiver._id},
                 {$push: {conversations: newConversation._id}})
             //push new message into conversation messages
-            let msg = await Message.create(newMessage)
+            if(newMessage.content !== undefined) {
+                let msg = await Message.create(newMessage)
             await Conversation.findByIdAndUpdate(
                 {_id: newConversation._id},
                 {$push: {messages: msg._id}}
                 )
-            return res.status(201).json(msg)
+            }
+            return res.status(201).json(newConversation)
         } else {
-            //push new message into conversation messages
-            let msg = await Message.create(newMessage)
-            await Conversation.findByIdAndUpdate(
-                {_id: foundConversation[0]._id},
-                {$push: {messages: msg._id}},
-                {new: true}
-            )
-            return res.status(201).json(msg)
+            if(newMessage.content !== undefined) {
+                //  push new message into conversation messages
+                let msg = await Message.create(newMessage)
+                await Conversation.findByIdAndUpdate(
+                    {_id: foundConversation[0]._id},
+                    {$push: {messages: msg._id}},
+                    {new: true}
+                ).populate("messages")
+            } 
+            return res.status(201).json(foundConversation)
         }
     } catch (err) {
         return res.status(500).json({error: err.message})
     }
 }
-//get messages for specific sender and receiver 
+//get thread
 const getAllMessages = async (req,res) => {
     try {
-        let {receiver, sender} = req.body
-        // let foundReceiver = await User.findById(req.params.id)
-        let foundReceiver = await User.findById(receiver)
-        // let foundSender = await User.findById()
-        let foundSender = await User.findById(sender)
-        //find convo - where messages are stored 
-        let foundConversation = await Conversation.find({ users: { $all: [foundReceiver._id, foundSender._id]}}).populate("messages")
-        //return conversation...message
-        return res.status(200).json(foundConversation)
+        let user = await Conversation.findById(req.params.id).populate({
+            path: "messages",
+            model: "Message",
+              populate: [{
+                path: "sender",
+                model: "User",
+            }, {
+                path: "receiver",
+                model: "User"
+            }]
+        }).populate("users")
+        return res.status(200).json(user)
     } catch (err) {
         return res.status(500).json({error: err.message})
     }
 }
 //delete message
 const deleteMessage = async (req, res) => {
-  try {
-    let deletedMessage = await Product.findByIdAndDelete(req.params.id)
-    // if message is found by id
-    if (deletedMessage) {
-      return res.status(200).json(deletedMessage)
-    } else {
-      return res.status(404).send("Message not deleted!")
+    try {
+        let deletedMessage = await Message.findByIdAndDelete(req.params.id)
+        let foundConversation = await Conversation.findOne({messages: {$in: [{_id: deletedMessage._id}]}})
+        await foundConversation.messages.pull({_id: deletedMessage._id})
+        await foundConversation.save()
+
+        if (deletedMessage) {
+            return res.status(200).json(foundConversation)
+        } else {
+            return res.status(404).send("Message not found")
+        }
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
     }
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
 }
 
 module.exports = { createMessage, getAllMessages, deleteMessage}

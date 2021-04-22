@@ -11,11 +11,9 @@ const TOKEN_KEY = "devoceanisthegreatestappever"
 //creating a user
 const signUp = async (req, res) => {
   try {
-    const { name, email, password } = req.body
+    const { name, email, password, job, imgURL, location, languages, professionalLink, about } = req.body
     const password_digest = await bcrypt.hash(password, SALT_ROUNDS)
-
-
-    const user = new User({ name, email, password_digest, imgURL, location, languages, professionalLink, about, conversations })
+    const user = new User({ name, email, password_digest, job, imgURL, location, languages, professionalLink, about })
     // or const user= await User.create(req.body) and remove the save 
     
     await user.save()
@@ -34,29 +32,25 @@ const signUp = async (req, res) => {
 }
 //user signing in
 const signIn = async (req, res) => {
-  const { name, password } = req.body
-  
+  const { email, password } = req.body
   try {
-    const user = await User.findOne({ name: name })
+    const user = await User.findOne({ email: email })
     if (user) {
       if (await bcrypt.compare(password, user.password_digest)) {
         const payload = {
           name: user.name,
           email: user.email,
         }
-      
         const token = jwt.sign(payload, TOKEN_KEY)
-  
         return res.status(200).json({ token, payload })
-  
       } else {
-        res.status(401).send("Invalid Credentials")
+          res.status(401).send("Invalid Credentials")
       }
     } else {
-      res.status(400).send("User does not exist")
+        res.status(400).send("User does not exist")
     }
   } catch (error) {
-    return res.status(500).json({ error: error.message })
+      return res.status(500).json({ error: error.message })
   }
 }
 //verify user
@@ -68,7 +62,7 @@ const verify = async (req, res) => {
       return res.json(payload)
     }
   } catch (error) {
-    res.status(401).send("Not Authorized")
+      res.status(401).send("Not Authorized")
   }
 }
 //change password
@@ -88,7 +82,6 @@ const changePassword = async (req, res) => {
         name: user.name,
         email: user.email
       }
-
       const token = jwt.sign(payload, TOKEN_KEY)
       return res.status(201).json({ user, token })
     } else {
@@ -114,9 +107,7 @@ const getUser = async (req, res) => {
       if (user) {
           return res.status(200).json(user);
       } else {
-          return res
-              .status(404)
-              .send("Item with specified ID does not exist!");
+          return res.status(404).send("Item with specified ID does not exist!");
       }
   } catch (error) {
       return res.status(500).json({ error: error.message });
@@ -125,7 +116,7 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    let updatedUser = await User.findByIdAndUpdate(req.params.id, rec.body, { new: true })
+    let updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
     if (updatedUser) {
       return res.status(200).json(updatedUser)
     } else {
@@ -136,4 +127,17 @@ const updateUser = async (req, res) => {
   }
 }
 
-module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser }
+const findUser = async (req, res) => {
+  try {
+    const user = await User.findOne(req.body)
+    if (user) {
+        return res.status(200).json(user)
+    } else {
+        return res.status(404).send("User not found")
+    }
+  } catch (error) {
+      return res.status(500).json({ error: error.message })
+  }
+}
+
+module.exports = { signUp, signIn, verify, changePassword, getUsers, getUser, updateUser, findUser }
