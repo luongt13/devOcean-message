@@ -24,7 +24,7 @@ function Search(props) {
                 type='text'
                 name='search'
                 id='search'
-                autocomplete="off"
+                autoComplete="off"
                 placeholder='Search user here...'
                 value={searchTerm}
                 onChange={handleChange}

@@ -34,13 +34,13 @@ export default function SendMessage(props) {
     async function handleSubmit(event) {
         event.preventDefault()
         await createMessage(message)
-        props.setToggle()
         setMessage(defaultInput)
+        props.setToggle()
     }
     //sender is user that is logged in...
     return (
-        <form className="send-message" onChange={handleChange} onSubmit={handleSubmit}>
-            <textarea type="text" id="message" value={message.content}placeholder="Type a message..."/>
+        <form className="send-message" onSubmit={handleSubmit}>
+            <textarea type="text" id="message" value={message.content} onChange={handleChange}  placeholder="Type a message..."/>
             <button type="submit">Send</button>
         </form>
     )

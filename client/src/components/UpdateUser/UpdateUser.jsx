@@ -10,6 +10,7 @@ export default function UpdateUser(props) {
 
   useEffect(() => {
     getUserData();
+      // eslint-disable-next-line
   }, [id]);
   
   async function getUserData() {
