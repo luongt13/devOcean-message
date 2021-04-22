@@ -61,9 +61,9 @@ export default function CreateMessage(props) {
                 <div className="search-results">
                     {searchTerm.length > 1 && filteredUsers.map((user) => {
                         return (
-                        <button className="result-button" onClick={handleClick} id={user._id} name={user.name} key={user.id}>
+                        <button className="result-button" onClick={handleClick} id={user._id} name={user.name} key={user._id}>
                             <div>
-                            <img className="avatar" src={user.imgURL}/>
+                            <img className="avatar" src={user.imgURL} alt="avatar"/>
                             <div className="details">
                                 <p className="name">{user.name}</p>
                                 <p className="email">{user.job}</p>
@@ -75,7 +75,7 @@ export default function CreateMessage(props) {
                 </div>
             </div>
             <form className="create-message" onChange={handleChange} onSubmit={handleSubmit}>
-                <input id="content" type="text" value={formInput.content} placeholder="Type a message..." />
+                <input id="content" type="text" defaultValue={formInput.content} placeholder="Type a message..." />
                 <button type="submit">Send</button>
             </form>
         </div>

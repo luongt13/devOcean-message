@@ -14,13 +14,15 @@ export default function UserProfile(props) {
 
   useEffect(() => {
     getUserData();
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
+      // eslint-disable-next-line
   }, [id]);
 
   useEffect(() => {
     if(found) {
       history.push(`/details/${found._id}`)
     }
+      // eslint-disable-next-line
   }, [found])
 
   async function getUserData() {
@@ -61,7 +63,7 @@ export default function UserProfile(props) {
             <p><strong>Location: </strong>{user.location}</p>
             <p><strong>Job Title: </strong>{user.job}</p>
             <p><strong>Languages: </strong>{user.languages}</p>
-            <a href={`${user.professionalLink}`} target="_blank">
+            <a href={`${user.professionalLink}`} target="_blank" rel="noreferrer">
               <img src="https://image.flaticon.com/icons/png/512/61/61109.png" height={40} width={40} alt={"linkedin icon"}/>
             </a>
           </div>

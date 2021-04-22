@@ -6,13 +6,14 @@
     width: 100%;
     bottom: 0;
     position: fixed;
+    background-color: white;
 }
 
 #message {
     width: 80%;
     height: 50px;
     border-radius: 25px;
-    padding: 5px;
+    padding: 15px;
     margin: 10px;
     background-color: lightgray;
     border: none
