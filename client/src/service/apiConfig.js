@@ -8,7 +8,7 @@ const getToken = async () => {
 let apiUrl
 
 const apiUrls = {
-    production: "https://devocean-app.netlify.app",
+    production: "https://dev-ocean-app.herokuapp.com/api",
     development: "http://localhost:4567/api"
 }
 
