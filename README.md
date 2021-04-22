@@ -2,6 +2,7 @@
 
 ## Project Name
 DevOcean
+[deployed site](https://devocean-app.netlify.app/)
 
 ## Team Members
 Tran Luong, Dominique Johnson, Nikki Gilpin
